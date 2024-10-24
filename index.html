@@ -91,7 +91,7 @@
                         if (subdirData.some(file => file.name === 'index.html')) {
                             projectList.push({
                                 name: item.name,
-                                url: `https://${repoOwner}.github.io/${repoName}/${item.name}/index.html`
+                                url: `https://${repoOwner}.github.io/${repoName}/${item.name}`
                             });
                         }
                     }
@@ -101,12 +101,7 @@
                 projectList.forEach(project => {
                     const listItem = document.createElement('li');
                     listItem.addEventListener('click', (event) => {
-                        if (event.button === 1) {
-                            // Middle mouse button click
-                            window.open(project.url, '_blank');
-                        } else {
-                            window.location.href = project.url;
-                        }
+                        window.open(project.url, '_blank');
                     });
                     const link = document.createElement('a');
                     link.textContent = project.name;
