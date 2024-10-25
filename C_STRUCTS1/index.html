@@ -5,8 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C Code - Structs</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; position: relative; background-color: #171718; color: #f0f0f0; }
-        .question-container { margin-bottom: 20px; }
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body { 
+            font-family: Montserrat, 
+            sans-serif; 
+            max-width: 600px; 
+            margin: 50px auto; 
+            position: relative; 
+            background-color: #0c0c0c; 
+            color: #f0f0f0; 
+        }
+        .question-container { 
+            margin-bottom: 20px; 
+            box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.5); /* Adjust the shadow values as needed */
+            padding: 2px 8px 4px 8px;
+            background-color: #141414;
+        }
         .option { cursor: pointer; padding: 8px; border: 1px solid #28282b; margin-bottom: 10px; transition: transform 0.2s ease; background-color: #28282b; color: #f0f0f0; display: flex; align-items: center; justify-content: space-between; }
         .option img { max-width: 500px; height: auto; margin-left: 10px; flex-shrink: 0; } .option:hover { transform: scale(1.05); background-color: #555; }
         .option:hover { transform: scale(1.05); background-color: #000000; }
@@ -15,10 +30,10 @@
         .correct { background-color: #66bd69; position: relative; color: #000; }
         .wrong { background-color: #df6158; position: relative; color: #000; }
         .icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 20px; }
-        #submit-button { position: fixed; bottom: 20px; right: 20px; padding: 15px 30px; z-index: 1000; background-color: #7abaff; border: none; cursor: pointer; transition: transform 0.2s ease; font-size: 16px; }
+        #submit-button { position: fixed; bottom: 20px; right: 20px; padding: 15px 30px; z-index: 1000; background-color: #7abaff; border: none; cursor: pointer; transition: transform 0.2s ease; font-size: 24px; }
         #submit-button:hover { transform: scale(1.05); }
         #submit-button:active { transform: scale(0.95); }
-        #timer { position: fixed; bottom: 70px; right: 20px; font-size: 18px; background-color: #28282b; color: #f0f0f0; padding: 5px; border-radius: 5px; }
+        #timer { position: fixed; bottom: 90px; right: 20px; font-size: 24px; background-color: #28282b; color: #f0f0f0; padding: 5px; border-radius: 5px; }
     </style>
 </head>
 <body>
