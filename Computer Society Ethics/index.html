@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Society - Ethical Codes for CP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body { 
+            font-family: Montserrat, 
+            sans-serif; 
+            max-width: 600px; 
+            margin: 50px auto; 
+            position: relative; 
+            background-color: #0c0c0c; 
+            color: #f0f0f0; 
+        }
+        .question-container { 
+            margin-bottom: 20px; 
+            box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.5); /* Adjust the shadow values as needed */
+            padding: 2px 8px 4px 8px;
+            background-color: #141414;
+        }
+        .option { cursor: pointer; padding: 8px; border: 1px solid #28282b; margin-bottom: 10px; transition: transform 0.2s ease; background-color: #28282b; color: #f0f0f0; display: flex; align-items: center; justify-content: space-between; }
+        .option img { max-width: 500px; height: auto; margin-left: 10px; flex-shrink: 0; } .option:hover { transform: scale(1.05); background-color: #555; }
+        .option:hover { transform: scale(1.05); background-color: #000000; }
+        .option:active { transform: scale(0.95); }
+        .option.selected { background-color: #7abaff; color: #000; }
+        .correct { background-color: #66bd69; position: relative; color: #000; }
+        .wrong { background-color: #df6158; position: relative; color: #000; }
+        .icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 20px; }
+        #submit-button { position: fixed; bottom: 20px; right: 20px; padding: 15px 30px; z-index: 1000; background-color: #7abaff; border: none; cursor: pointer; transition: transform 0.2s ease; font-size: 24px; }
+        #submit-button:hover { transform: scale(1.05); }
+        #submit-button:active { transform: scale(0.95); }
+        #timer { position: fixed; bottom: 90px; right: 20px; font-size: 24px; background-color: #28282b; color: #f0f0f0; padding: 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Computer Society - Ethical Codes for CP</h1>
+    <div id="quiz"></div>
+    <div id="timer">Time: 0s</div>
+    <button id="submit-button">Submit Answers</button>
+    <audio id="select-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="select-submit-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="hover-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="submit-sound" src="data:audio/mpeg;base64,None"></audio>
+    <script>
+	const quizData = [
+            {
+            question: "1) Which of the following is a core principle of the ACM Code of Ethics?",
+            options: [
+                { text: "Acting in the public interest" },
+                { text: "Prioritizing personal financial gain" },
+                { text: "Disregarding user privacy" },
+                { text: "Restricting access to technology" },
+            ],
+            correct: "Acting in the public interest"
+        },
+        {
+            question: "2) According to the IEEE Code of Ethics, computer professionals should always:",
+            options: [
+                { text: "Disclose potential conflicts of interest" },
+                { text: "Ignore safety concerns" },
+                { text: "Prioritize profits over ethical concerns" },
+                { text: "Avoid collaboration with others" },
+            ],
+            correct: "Disclose potential conflicts of interest"
+        },
+        {
+            question: "3) One of the primary goals of ethical codes for computer professionals is to:",
+            options: [
+                { text: "Promote trust and respect in technology" },
+                { text: "Maximize personal benefits at all costs" },
+                { text: "Restrict access to information" },
+                { text: "Limit cooperation among teams" },
+            ],
+            correct: "Promote trust and respect in technology"
+        },
+        {
+            question: "4) In the ACM Code of Ethics, the principle of 'Integrity' requires professionals to:",
+            options: [
+                { text: "Act honestly and avoid deception" },
+                { text: "Ignore the impact of their work" },
+                { text: "Prioritize speed over accuracy" },
+                { text: "Conceal mistakes at all costs" },
+            ],
+            correct: "Act honestly and avoid deception"
+        },
+        {
+            question: "5) According to ethical guidelines, computer professionals should:",
+            options: [
+                { text: "Maintain privacy and confidentiality of user data" },
+                { text: "Collect and share data without restrictions" },
+                { text: "Ignore potential data security risks" },
+                { text: "Prioritize personal gain over ethical practices" },
+            ],
+            correct: "Maintain privacy and confidentiality of user data"
+        },
+        {
+            question: "6) The principle of 'Accountability' in ethical codes means:",
+            options: [
+                { text: "Taking responsibility for oneâ€™s actions and decisions" },
+                { text: "Blaming others for mistakes" },
+                { text: "Avoiding responsibility for outcomes" },
+                { text: "Relying on others for ethical decisions" },
+            ],
+            correct: "Taking responsibility for oneâ€™s actions and decisions"
+        },
+        {
+            question: "7) The ACM Code of Ethics emphasizes that computer professionals should prioritize:",
+            options: [
+                { text: "The well-being and privacy of users" },
+                { text: "Profit above all other considerations" },
+                { text: "Personal gain over professional standards" },
+                { text: "Ignoring client needs" },
+            ],
+            correct: "The well-being and privacy of users"
+        },
+        {
+            question: "8) What does the IEEE Code of Ethics recommend in terms of conflicts of interest?",
+            options: [
+                { text: "Disclose any conflicts of interest to all stakeholders" },
+                { text: "Ignore conflicts of interest" },
+                { text: "Prioritize personal interests over conflicts" },
+                { text: "Keep conflicts of interest confidential" },
+            ],
+            correct: "Disclose any conflicts of interest to all stakeholders"
+        },
+        {
+            question: "9) Why is lifelong learning emphasized in the ACM Code of Ethics?",
+            options: [
+                { text: "To ensure professionals stay updated with evolving technologies and ethical standards" },
+                { text: "To increase personal profit" },
+                { text: "To meet minimum compliance requirements only" },
+                { text: "To avoid all new knowledge in the field" },
+            ],
+            correct: "To ensure professionals stay updated with evolving technologies and ethical standards"
+        },
+        {
+            question: "10) Ethical codes suggest that computer professionals should be committed to:",
+            options: [
+                { text: "Contributing to the improvement of society" },
+                { text: "Avoiding any collaboration with others" },
+                { text: "Suppressing information about their work" },
+                { text: "Ignoring legal compliance" },
+            ],
+            correct: "Contributing to the improvement of society"
+        },
+        {
+            question: "11) Which of these is a fundamental responsibility under the ACM Code of Ethics?",
+            options: [
+                { text: "Respecting the privacy and confidentiality of information" },
+                { text: "Collecting all personal data without limits" },
+                { text: "Prioritizing profits over user interests" },
+                { text: "Avoiding user privacy protections" },
+            ],
+            correct: "Respecting the privacy and confidentiality of information"
+        },
+        {
+            question: "12) Ethical guidelines recommend that computer professionals should avoid:",
+            options: [
+                { text: "Misrepresenting data or results in their work" },
+                { text: "Collaborating with others" },
+                { text: "Learning new technologies" },
+                { text: "Following transparency in their actions" },
+            ],
+            correct: "Misrepresenting data or results in their work"
+        },
+        {
+            question: "13) Which of the following is encouraged by ethical codes in tech professions?",
+            options: [
+                { text: "Using skills to promote positive social change" },
+                { text: "Sharing confidential client information freely" },
+                { text: "Limiting access to information for all users" },
+                { text: "Prioritizing only financial gain" },
+            ],
+            correct: "Using skills to promote positive social change"
+        },
+        {
+            question: "14) In cases of potential harm to the public, ethical codes require professionals to:",
+            options: [
+                { text: "Prioritize public safety and report concerns appropriately" },
+                { text: "Ignore the issue and proceed" },
+                { text: "Only consider financial implications" },
+                { text: "Keep information confidential at all costs" },
+            ],
+            correct: "Prioritize public safety and report concerns appropriately"
+        },
+        {
+            question: "15) According to the IEEE, professionals should only work in areas where:",
+            options: [
+                { text: "They have adequate knowledge and expertise" },
+                { text: "They have minimal understanding" },
+                { text: "They lack any experience" },
+                { text: "Their knowledge is not relevant" },
+            ],
+            correct: "They have adequate knowledge and expertise"
+        },
+        {
+            question: "16) Transparency in ethical codes means:",
+            options: [
+                { text: "Being open and honest about oneâ€™s work and decisions" },
+                { text: "Keeping all information hidden" },
+                { text: "Withholding information from stakeholders" },
+                { text: "Avoiding explanations to clients" },
+            ],
+            correct: "Being open and honest about oneâ€™s work and decisions"
+        },
+        {
+            question: "17) According to ethical standards, computer professionals should strive to:",
+            options: [
+                { text: "Produce high-quality and accurate work" },
+                { text: "Complete tasks as quickly as possible, disregarding accuracy" },
+                { text: "Ignore the quality of their work" },
+                { text: "Overlook user feedback" },
+            ],
+            correct: "Produce high-quality and accurate work"
+        },
+        {
+            question: "18) The principle of 'honesty' in professional ethics requires that:",
+            options: [
+                { text: "Information provided should be truthful and not misleading" },
+                { text: "Only positive information should be shared" },
+                { text: "All work is kept confidential" },
+                { text: "Only financial details are disclosed" },
+            ],
+            correct: "Information provided should be truthful and not misleading"
+        },
+        {
+            question: "19) Respect for intellectual property in ethical guidelines means:",
+            options: [
+                { text: "Recognizing and protecting the ownership of ideas and creations" },
+                { text: "Using any idea freely without permission" },
+                { text: "Taking credit for others' work" },
+                { text: "Ignoring ownership rights" },
+            ],
+            correct: "Recognizing and protecting the ownership of ideas and creations"
+        },
+        {
+            question: "20) The ACM Code of Ethics suggests that computer professionals should:",
+            options: [
+                { text: "Continually improve their own skills and knowledge" },
+                { text: "Disregard advances in technology" },
+                { text: "Limit learning to the basics" },
+                { text: "Prioritize personal interest over professional development" },
+            ],
+            correct: "Continually improve their own skills and knowledge"
+        },
+ ];
+
+        const quizContainer = document.getElementById('quiz');
+        const submitButton = document.getElementById('submit-button');
+
+        const selectSound = document.getElementById('select-sound');
+        const hoverSound = document.getElementById('hover-sound');
+        const submitSound = document.getElementById('submit-sound');
+        const selectSubmitSound = document.getElementById('select-submit-sound');
+
+        const timerElement = document.getElementById('timer');
+        let selectedAnswers = [];
+        let timer = 0;
+        let timerInterval;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizContainer.innerHTML = '';
+            selectedAnswers = new Array(quizData.length).fill(null);
+            quizData.forEach((data, index) => {
+                const questionContainer = document.createElement('div');
+                questionContainer.classList.add('question-container');
+
+                const questionElement = document.createElement('h3');
+                questionElement.innerHTML = `${index + 1}. ${data.question}`;
+                questionContainer.appendChild(questionElement);
+
+                if (data.image) {
+                    const questionImage = document.createElement('img');
+                    questionImage.src = data.image;
+                    questionImage.alt = "Question Image";
+                    questionImage.style.maxWidth = '100%';
+                    questionImage.style.marginBottom = '10px';
+                    questionContainer.appendChild(questionImage);
+                }
+
+                const options = [...data.options];
+                shuffle(options);
+
+                options.forEach(option => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add('option');
+                    optionElement.textContent = option.text;
+
+                    if (option.image) {
+                        const optionImage = document.createElement('img');
+                        optionImage.src = option.image;
+                        optionImage.alt = "Option Image";
+                        optionImage.style.maxWidth = '500px';
+                        optionImage.style.marginLeft = '10px';
+                        optionElement.appendChild(optionImage);
+                    }
+
+                    optionElement.addEventListener('mouseenter', () => {
+                        hoverSound.currentTime = 0;  // Reset the hover audio to the start
+                        hoverSound.play();  // Play the hover sound
+                    });
+
+                    optionElement.addEventListener('click', () => {
+                        selectSound.currentTime = 0;
+                        selectSound.play();
+                        if (selectedAnswers[index] === option.text) {
+                            selectedAnswers[index] = null;
+                            optionElement.classList.remove('selected');
+                        } else {
+                            selectedAnswers[index] = option.text;
+                            Array.from(questionContainer.getElementsByClassName('option')).forEach(opt => opt.classList.remove('selected'));
+                            optionElement.classList.add('selected');
+                        }
+                    });
+                    questionContainer.appendChild(optionElement);
+                });
+
+                quizContainer.appendChild(questionContainer);
+            });
+        }
+
+        function startTimer() {
+            timer = 0;
+            timerElement.textContent = `Time: ${timer}s`;
+            timerInterval = setInterval(() => {
+                timer++;
+                timerElement.textContent = `Time: ${timer}s`;
+            }, 1000);
+        }
+
+        submitButton.addEventListener('click', () => {
+            selectSubmitSound.currentTime = 0;
+            selectSubmitSound.play();
+            if (submitButton.textContent === 'Submit Answers') {
+                submitSound.currentTime = 0;
+                submitSound.play();
+                clearInterval(timerInterval);
+                let score = 0;
+                quizContainer.innerHTML = '';
+                quizData.forEach((data, index) => {
+                    const questionContainer = document.createElement('div');
+                    questionContainer.classList.add('question-container');
+
+                    const questionElement = document.createElement('h3');
+                    questionElement.innerHTML = `${index + 1}. ${data.question}`;
+                    questionContainer.appendChild(questionElement);
+
+                    if (data.image) {
+                        const questionImage = document.createElement('img');
+                        questionImage.src = data.image;
+                        questionImage.alt = "Question Image";
+                        questionImage.style.maxWidth = '100%';
+                        questionImage.style.marginBottom = '10px';
+                        questionContainer.appendChild(questionImage);
+                    }
+
+                    data.options.forEach(option => {
+                        const optionElement = document.createElement('div');
+                        optionElement.classList.add('option');
+                        optionElement.textContent = option.text;
+
+                        if (option.image) {
+                            const optionImage = document.createElement('img');
+                            optionImage.src = option.image;
+                            optionImage.alt = "Option Image";
+                            optionImage.style.maxWidth = '500px';
+                            optionImage.style.marginLeft = '10px';
+                            optionElement.appendChild(optionImage);
+                        }
+
+                        if (option.text === data.correct) {
+                            if (selectedAnswers[index] === option.text) {
+                                score++;
+                                optionElement.classList.add('correct');
+                                const tickIcon = document.createElement('span');
+                                tickIcon.classList.add('icon');
+                                tickIcon.textContent = '✔';
+                                optionElement.appendChild(tickIcon);
+                            } else {
+                                optionElement.classList.add('correct');
+                            }
+                        } else if (selectedAnswers[index] === option.text) {
+                            optionElement.classList.add('wrong');
+                            const crossIcon = document.createElement('span');
+                            crossIcon.classList.add('icon');
+                            crossIcon.textContent = '✖';
+                            optionElement.appendChild(crossIcon);
+                        }
+                        questionContainer.appendChild(optionElement);
+                    });
+
+                    quizContainer.appendChild(questionContainer);
+                });
+
+                timerElement.textContent = `Your score: ${score}/${quizData.length}`;
+                submitButton.textContent = 'Retake';
+            } else if (submitButton.textContent === 'Retake') {
+                loadQuiz();
+                startTimer();
+                submitButton.textContent = 'Submit Answers';
+            }
+        });
+
+        loadQuiz();
+        startTimer();
+    </script>
+</body>
+</html>
