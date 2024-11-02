@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Society - Haseen</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body { 
+            font-family: Montserrat, 
+            sans-serif; 
+            max-width: 600px; 
+            margin: 50px auto; 
+            position: relative; 
+            background-color: #0c0c0c; 
+            color: #f0f0f0; 
+        }
+        .question-container { 
+            margin-bottom: 20px; 
+            box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.5); /* Adjust the shadow values as needed */
+            padding: 2px 8px 4px 8px;
+            background-color: #141414;
+        }
+        .option { cursor: pointer; padding: 8px; border: 1px solid #28282b; margin-bottom: 10px; transition: transform 0.2s ease; background-color: #28282b; color: #f0f0f0; display: flex; align-items: center; justify-content: space-between; }
+        .option img { max-width: 500px; height: auto; margin-left: 10px; flex-shrink: 0; } .option:hover { transform: scale(1.05); background-color: #555; }
+        .option:hover { transform: scale(1.05); background-color: #000000; }
+        .option:active { transform: scale(0.95); }
+        .option.selected { background-color: #7abaff; color: #000; }
+        .correct { background-color: #66bd69; position: relative; color: #000; }
+        .wrong { background-color: #df6158; position: relative; color: #000; }
+        .icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 20px; }
+        #submit-button { position: fixed; bottom: 20px; right: 20px; padding: 15px 30px; z-index: 1000; background-color: #7abaff; border: none; cursor: pointer; transition: transform 0.2s ease; font-size: 24px; }
+        #submit-button:hover { transform: scale(1.05); }
+        #submit-button:active { transform: scale(0.95); }
+        #timer { position: fixed; bottom: 90px; right: 20px; font-size: 24px; background-color: #28282b; color: #f0f0f0; padding: 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Computer Society - Haseen</h1>
+    <div id="quiz"></div>
+    <div id="timer">Time: 0s</div>
+    <button id="submit-button">Submit Answers</button>
+    <audio id="select-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="select-submit-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="hover-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="submit-sound" src="data:audio/mpeg;base64,None"></audio>
+    <script>
+	const quizData = [
+            {
+            question: "1) What is the primary purpose of the Haseen Indicator?",
+            options: [
+                { text: "To assess cybersecurity readiness and resilience in government agencies" },
+                { text: "To track digital transformation efforts" },
+                { text: "To monitor business continuity practices" },
+                { text: "To evaluate data management maturity" },
+            ],
+            correct: "To assess cybersecurity readiness and resilience in government agencies"
+        },
+        {
+            question: "2) Which organization is responsible for overseeing the Haseen Indicator?",
+            options: [
+                { text: "National Cybersecurity Authority (NCA)" },
+                { text: "Saudi Data and Artificial Intelligence Authority (SDAIA)" },
+                { text: "Digital Government Authority (DGA)" },
+                { text: "National Risk Council (NRC)" },
+            ],
+            correct: "National Cybersecurity Authority (NCA)"
+        },
+        {
+            question: "3) The Haseen Indicator helps government agencies track:",
+            options: [
+                { text: "Their level of cybersecurity compliance and risk management" },
+                { text: "Progress in digital skills training" },
+                { text: "Public satisfaction with government services" },
+                { text: "Employee productivity levels" },
+            ],
+            correct: "Their level of cybersecurity compliance and risk management"
+        },
+        {
+            question: "4) The Haseen Indicator is mainly used to:",
+            options: [
+                { text: "Evaluate the cybersecurity maturity of government entities" },
+                { text: "Measure customer satisfaction" },
+                { text: "Track environmental impact" },
+                { text: "Monitor healthcare initiatives" },
+            ],
+            correct: "Evaluate the cybersecurity maturity of government entities"
+        },
+        {
+            question: "5) One of the goals of the Haseen Indicator is to:",
+            options: [
+                { text: "Identify vulnerabilities in cybersecurity defenses" },
+                { text: "Monitor financial spending" },
+                { text: "Evaluate business continuity readiness" },
+                { text: "Enhance workforce productivity" },
+            ],
+            correct: "Identify vulnerabilities in cybersecurity defenses"
+        },
+        {
+            question: "6) The Haseen Indicator supports government agencies by:",
+            options: [
+                { text: "Providing recommendations to improve cybersecurity" },
+                { text: "Tracking digital transformation initiatives" },
+                { text: "Assessing customer service quality" },
+                { text: "Evaluating environmental policies" },
+            ],
+            correct: "Providing recommendations to improve cybersecurity"
+        },
+        {
+            question: "7) Which of the following best describes the role of the Haseen Indicator?",
+            options: [
+                { text: "A tool for evaluating cybersecurity resilience in public sector organizations" },
+                { text: "A measure of financial health" },
+                { text: "An indicator for monitoring public health statistics" },
+                { text: "A system for tracking employee attendance" },
+            ],
+            correct: "A tool for evaluating cybersecurity resilience in public sector organizations"
+        },
+        {
+            question: "8) The Haseen Indicator provides insights on:",
+            options: [
+                { text: "How secure government agency systems are against cyber threats" },
+                { text: "Employee satisfaction rates" },
+                { text: "Data management efficiency" },
+                { text: "Economic growth indicators" },
+            ],
+            correct: "How secure government agency systems are against cyber threats"
+        },
+        {
+            question: "9) Which of these is a key benefit of the Haseen Indicator?",
+            options: [
+                { text: "It helps agencies pinpoint weaknesses in their cybersecurity practices" },
+                { text: "It tracks employee performance metrics" },
+                { text: "It improves data transparency" },
+                { text: "It monitors healthcare improvements" },
+            ],
+            correct: "It helps agencies pinpoint weaknesses in their cybersecurity practices"
+        },
+        {
+            question: "10) The Haseen Indicator primarily assists government agencies by:",
+            options: [
+                { text: "Strengthening their cybersecurity posture and resilience" },
+                { text: "Enhancing customer satisfaction" },
+                { text: "Improving financial audits" },
+                { text: "Reducing operational costs" },
+            ],
+            correct: "Strengthening their cybersecurity posture and resilience"
+        },
+ ];
+
+        const quizContainer = document.getElementById('quiz');
+        const submitButton = document.getElementById('submit-button');
+
+        const selectSound = document.getElementById('select-sound');
+        const hoverSound = document.getElementById('hover-sound');
+        const submitSound = document.getElementById('submit-sound');
+        const selectSubmitSound = document.getElementById('select-submit-sound');
+
+        const timerElement = document.getElementById('timer');
+        let selectedAnswers = [];
+        let timer = 0;
+        let timerInterval;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizContainer.innerHTML = '';
+            selectedAnswers = new Array(quizData.length).fill(null);
+            quizData.forEach((data, index) => {
+                const questionContainer = document.createElement('div');
+                questionContainer.classList.add('question-container');
+
+                const questionElement = document.createElement('h3');
+                questionElement.innerHTML = `${index + 1}. ${data.question}`;
+                questionContainer.appendChild(questionElement);
+
+                if (data.image) {
+                    const questionImage = document.createElement('img');
+                    questionImage.src = data.image;
+                    questionImage.alt = "Question Image";
+                    questionImage.style.maxWidth = '100%';
+                    questionImage.style.marginBottom = '10px';
+                    questionContainer.appendChild(questionImage);
+                }
+
+                const options = [...data.options];
+                shuffle(options);
+
+                options.forEach(option => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add('option');
+                    optionElement.textContent = option.text;
+
+                    if (option.image) {
+                        const optionImage = document.createElement('img');
+                        optionImage.src = option.image;
+                        optionImage.alt = "Option Image";
+                        optionImage.style.maxWidth = '500px';
+                        optionImage.style.marginLeft = '10px';
+                        optionElement.appendChild(optionImage);
+                    }
+
+                    optionElement.addEventListener('mouseenter', () => {
+                        hoverSound.currentTime = 0;  // Reset the hover audio to the start
+                        hoverSound.play();  // Play the hover sound
+                    });
+
+                    optionElement.addEventListener('click', () => {
+                        selectSound.currentTime = 0;
+                        selectSound.play();
+                        if (selectedAnswers[index] === option.text) {
+                            selectedAnswers[index] = null;
+                            optionElement.classList.remove('selected');
+                        } else {
+                            selectedAnswers[index] = option.text;
+                            Array.from(questionContainer.getElementsByClassName('option')).forEach(opt => opt.classList.remove('selected'));
+                            optionElement.classList.add('selected');
+                        }
+                    });
+                    questionContainer.appendChild(optionElement);
+                });
+
+                quizContainer.appendChild(questionContainer);
+            });
+        }
+
+        function startTimer() {
+            timer = 0;
+            timerElement.textContent = `Time: ${timer}s`;
+            timerInterval = setInterval(() => {
+                timer++;
+                timerElement.textContent = `Time: ${timer}s`;
+            }, 1000);
+        }
+
+        submitButton.addEventListener('click', () => {
+            selectSubmitSound.currentTime = 0;
+            selectSubmitSound.play();
+            if (submitButton.textContent === 'Submit Answers') {
+                submitSound.currentTime = 0;
+                submitSound.play();
+                clearInterval(timerInterval);
+                let score = 0;
+                quizContainer.innerHTML = '';
+                quizData.forEach((data, index) => {
+                    const questionContainer = document.createElement('div');
+                    questionContainer.classList.add('question-container');
+
+                    const questionElement = document.createElement('h3');
+                    questionElement.innerHTML = `${index + 1}. ${data.question}`;
+                    questionContainer.appendChild(questionElement);
+
+                    if (data.image) {
+                        const questionImage = document.createElement('img');
+                        questionImage.src = data.image;
+                        questionImage.alt = "Question Image";
+                        questionImage.style.maxWidth = '100%';
+                        questionImage.style.marginBottom = '10px';
+                        questionContainer.appendChild(questionImage);
+                    }
+
+                    data.options.forEach(option => {
+                        const optionElement = document.createElement('div');
+                        optionElement.classList.add('option');
+                        optionElement.textContent = option.text;
+
+                        if (option.image) {
+                            const optionImage = document.createElement('img');
+                            optionImage.src = option.image;
+                            optionImage.alt = "Option Image";
+                            optionImage.style.maxWidth = '500px';
+                            optionImage.style.marginLeft = '10px';
+                            optionElement.appendChild(optionImage);
+                        }
+
+                        if (option.text === data.correct) {
+                            if (selectedAnswers[index] === option.text) {
+                                score++;
+                                optionElement.classList.add('correct');
+                                const tickIcon = document.createElement('span');
+                                tickIcon.classList.add('icon');
+                                tickIcon.textContent = '✔';
+                                optionElement.appendChild(tickIcon);
+                            } else {
+                                optionElement.classList.add('correct');
+                            }
+                        } else if (selectedAnswers[index] === option.text) {
+                            optionElement.classList.add('wrong');
+                            const crossIcon = document.createElement('span');
+                            crossIcon.classList.add('icon');
+                            crossIcon.textContent = '✖';
+                            optionElement.appendChild(crossIcon);
+                        }
+                        questionContainer.appendChild(optionElement);
+                    });
+
+                    quizContainer.appendChild(questionContainer);
+                });
+
+                timerElement.textContent = `Your score: ${score}/${quizData.length}`;
+                submitButton.textContent = 'Retake';
+            } else if (submitButton.textContent === 'Retake') {
+                loadQuiz();
+                startTimer();
+                submitButton.textContent = 'Submit Answers';
+            }
+        });
+
+        loadQuiz();
+        startTimer();
+    </script>
+</body>
+</html>
