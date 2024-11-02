@@ -48,204 +48,304 @@
     <script>
 	const quizData = [
             {
-            question: "1) What is one of the main positive effects of Facebook on society?",
+            question: "1) What is a primary positive impact of social media?",
             options: [
-                { text: "Connecting people across geographical boundaries" },
-                { text: "Creating financial instability" },
-                { text: "Increasing data privacy risks" },
-                { text: "Reducing digital literacy" },
+                { text: "Promoting data collection for targeted advertising" },
+                { text: "Enabling rapid communication and connectivity" },
+                { text: "Creating filter bubbles" },
+                { text: "Raising concerns over mental health issues" },
             ],
-            correct: "Connecting people across geographical boundaries"
+            correct: "Enabling rapid communication and connectivity"
         },
         {
-            question: "2) Which of the following is a common negative impact of Facebook on mental health?",
+            question: "2) Which term refers to the rapid spread of information through social media platforms?",
             options: [
-                { text: "Increased anxiety and depression" },
-                { text: "Enhanced critical thinking skills" },
-                { text: "Improved memory" },
-                { text: "Reduced social interaction" },
+                { text: "Misinformation" },
+                { text: "Content curation" },
+                { text: "Information dissemination" },
+                { text: "Targeted advertising" },
             ],
-            correct: "Increased anxiety and depression"
+            correct: "Information dissemination"
         },
         {
-            question: "3) Facebook's algorithms often create 'echo chambers.' What is an echo chamber?",
+            question: "3) What is a major privacy concern associated with social media?",
             options: [
-                { text: "A situation where users are exposed to content that reinforces their existing beliefs" },
-                { text: "A place where all opinions are equally represented" },
-                { text: "A secure area for private conversations" },
-                { text: "A method for reducing fake news" },
+                { text: "Improving mental health awareness" },
+                { text: "Data collection and misuse of personal information" },
+                { text: "Facilitating online learning" },
+                { text: "Promoting business growth" },
             ],
-            correct: "A situation where users are exposed to content that reinforces their existing beliefs"
+            correct: "Data collection and misuse of personal information"
         },
         {
-            question: "4) What is one way Facebook contributes to disinformation?",
+            question: "4) Which of the following is an example of social media supporting activism?",
             options: [
-                { text: "Allowing rapid spread of fake news and misinformation" },
-                { text: "Providing accurate news to all users" },
-                { text: "Removing all unverified content" },
-                { text: "Only showing government-approved information" },
+                { text: "Allowing users to curate personal content" },
+                { text: "The rise of movements like #MeToo" },
+                { text: "Increasing targeted advertising" },
+                { text: "Creating echo chambers for users" },
             ],
-            correct: "Allowing rapid spread of fake news and misinformation"
+            correct: "The rise of movements like #MeToo"
         },
         {
-            question: "5) Which of the following best describes 'cyberbullying' on Facebook?",
+            question: "5) What does the term 'filter bubble' mean in the context of social media?",
             options: [
-                { text: "Harassment and intimidation of individuals online" },
-                { text: "Promoting ethical discussions" },
-                { text: "Offering online courses" },
-                { text: "Providing secure banking services" },
+                { text: "A space for creating targeted ads" },
+                { text: "A digital environment that reinforces existing beliefs" },
+                { text: "A collection of diverse news sources" },
+                { text: "An educational tool for collaborative learning" },
             ],
-            correct: "Harassment and intimidation of individuals online"
+            correct: "A digital environment that reinforces existing beliefs"
         },
         {
-            question: "6) How has Facebook impacted marketing and advertising?",
+            question: "6) Which aspect of social media can lead to cyberbullying?",
             options: [
-                { text: "It allows businesses to reach targeted audiences more effectively" },
-                { text: "It prevents targeted advertising" },
-                { text: "It only allows traditional TV ads" },
-                { text: "It limits marketing to non-profit organizations" },
+                { text: "Targeted advertising" },
+                { text: "Privacy concerns" },
+                { text: "Anonymity and online harassment" },
+                { text: "Echo chambers" },
             ],
-            correct: "It allows businesses to reach targeted audiences more effectively"
+            correct: "Anonymity and online harassment"
         },
         {
-            question: "7) What is one potential privacy risk associated with Facebook?",
+            question: "7) How does social media influence mental health negatively?",
             options: [
-                { text: "Personal data can be collected and shared without clear consent" },
-                { text: "Personal data is entirely secure and private" },
-                { text: "Only non-personal data is collected" },
-                { text: "Data is never shared with third parties" },
+                { text: "By fostering online learning" },
+                { text: "By enabling data collection" },
+                { text: "By promoting constant social comparison" },
+                { text: "By increasing connectivity" },
             ],
-            correct: "Personal data can be collected and shared without clear consent"
+            correct: "By promoting constant social comparison"
         },
         {
-            question: "8) Which of the following describes 'filter bubbles' on Facebook?",
+            question: "8) What is a negative effect of 'echo chambers' on social media?",
             options: [
-                { text: "An environment where users only see content aligned with their preferences and beliefs" },
-                { text: "A method for protecting user privacy" },
-                { text: "A tool for reducing advertising" },
-                { text: "A feature that increases friend recommendations" },
+                { text: "Enhancing education opportunities" },
+                { text: "Limiting exposure to diverse viewpoints" },
+                { text: "Facilitating rapid news dissemination" },
+                { text: "Encouraging data privacy" },
             ],
-            correct: "An environment where users only see content aligned with their preferences and beliefs"
+            correct: "Limiting exposure to diverse viewpoints"
         },
         {
-            question: "9) What is a major ethical concern with Facebook's use of personal data?",
+            question: "9) What do algorithms on social media primarily aim to do?",
             options: [
-                { text: "Data is sometimes used for targeted advertising without user knowledge" },
-                { text: "All data is kept confidential" },
-                { text: "Data is shared only with trusted government agencies" },
-                { text: "User data is completely protected from misuse" },
+                { text: "Promote creativity and self-expression" },
+                { text: "Personalize content to maintain user engagement" },
+                { text: "Protect user privacy" },
+                { text: "Support educational content" },
             ],
-            correct: "Data is sometimes used for targeted advertising without user knowledge"
+            correct: "Personalize content to maintain user engagement"
         },
         {
-            question: "10) Facebook has been accused of prioritizing engagement over user well-being. This refers to:",
+            question: "10) What type of advertising targets users based on their personal data?",
             options: [
-                { text: "The use of algorithms to maximize time spent on the platform" },
-                { text: "Increasing user privacy settings" },
-                { text: "Encouraging mental health awareness" },
-                { text: "Banning all advertisements" },
+                { text: "Public interest advertising" },
+                { text: "Personalized advertising" },
+                { text: "Educational marketing" },
+                { text: "Community engagement campaigns" },
             ],
-            correct: "The use of algorithms to maximize time spent on the platform"
+            correct: "Personalized advertising"
         },
         {
-            question: "11) What is a benefit of Facebook for social activism?",
+            question: "11) Which action is a positive impact of social media on businesses?",
             options: [
-                { text: "It provides a platform for organizing and raising awareness on social issues" },
-                { text: "It prevents people from sharing social messages" },
-                { text: "It censors all public debates" },
-                { text: "It restricts access to local news" },
+                { text: "Promoting mental health issues" },
+                { text: "Cost-effective marketing and customer engagement" },
+                { text: "Creating echo chambers" },
+                { text: "Limiting user interactions" },
             ],
-            correct: "It provides a platform for organizing and raising awareness on social issues"
+            correct: "Cost-effective marketing and customer engagement"
         },
         {
-            question: "12) How does Facebook contribute to the spread of misinformation?",
+            question: "12) Why is data privacy a critical concern on social media?",
             options: [
-                { text: "By allowing unchecked sharing of content, including false news" },
-                { text: "By verifying every post before it is shared" },
-                { text: "By limiting all posts to official news sources" },
-                { text: "By providing fact-checking on every piece of content" },
+                { text: "Due to increased activism" },
+                { text: "Due to the potential for data misuse and breaches" },
+                { text: "To improve online learning" },
+                { text: "To enable public connectivity" },
             ],
-            correct: "By allowing unchecked sharing of content, including false news"
+            correct: "Due to the potential for data misuse and breaches"
         },
         {
-            question: "13) Which of the following is a positive impact of Facebook on education?",
+            question: "13) How do 'echo chambers' on social media impact public discourse?",
             options: [
-                { text: "It offers access to educational resources and online communities" },
-                { text: "It restricts access to academic articles" },
-                { text: "It censors academic discussions" },
-                { text: "It only allows entertainment content" },
+                { text: "They reduce privacy concerns" },
+                { text: "They increase understanding of diverse opinions" },
+                { text: "They create polarization and divisiveness" },
+                { text: "They help in targeted advertising" },
             ],
-            correct: "It offers access to educational resources and online communities"
+            correct: "They create polarization and divisiveness"
         },
         {
-            question: "14) What is one reason Facebook is criticized for its advertising practices?",
+            question: "14) Which of these is a key feature of Facebook that has raised privacy concerns?",
             options: [
-                { text: "Ads are often based on personal data without user consent" },
-                { text: "Ads are never targeted to user preferences" },
-                { text: "Ads are banned for small businesses" },
-                { text: "Facebook does not allow advertising at all" },
+                { text: "Data collection practices" },
+                { text: "Promoting activism" },
+                { text: "Increasing creativity" },
+                { text: "Facilitating online education" },
             ],
-            correct: "Ads are often based on personal data without user consent"
+            correct: "Data collection practices"
         },
         {
-            question: "15) Facebook has been scrutinized for its role in data privacy violations. A notable example is:",
+            question: "15) What is a major risk of disinformation on social media?",
             options: [
-                { text: "The Cambridge Analytica scandal" },
-                { text: "The ban on social media advertising" },
-                { text: "The promotion of public health campaigns" },
-                { text: "The restriction of social activism" },
+                { text: "Improving business marketing" },
+                { text: "Spreading false information and influencing opinions" },
+                { text: "Increasing engagement for youth" },
+                { text: "Enhancing self-expression" },
             ],
-            correct: "The Cambridge Analytica scandal"
+            correct: "Spreading false information and influencing opinions"
         },
         {
-            question: "16) How can Facebook create issues with personal relationships?",
+            question: "16) What is meant by 'digital footprint'?",
             options: [
-                { text: "Increased jealousy and comparison due to curated posts" },
-                { text: "Encouraging physical exercise" },
-                { text: "Providing career counseling services" },
-                { text: "Offering dating advice" },
+                { text: "A record of a user's online activities" },
+                { text: "Data protection laws" },
+                { text: "Filter bubble" },
+                { text: "Cyberbullying practices" },
             ],
-            correct: "Increased jealousy and comparison due to curated posts"
+            correct: "A record of a user's online activities"
         },
         {
-            question: "17) Facebookâ€™s platform design often encourages:",
+            question: "17) Which of these describes targeted advertising?",
             options: [
-                { text: "Extended screen time through notifications and updates" },
-                { text: "User meditation and relaxation" },
-                { text: "Reduced engagement" },
-                { text: "Face-to-face meetings" },
+                { text: "Using data to display ads that match user interests" },
+                { text: "Creating awareness for social issues" },
+                { text: "Providing free educational content" },
+                { text: "Improving user data privacy" },
             ],
-            correct: "Extended screen time through notifications and updates"
+            correct: "Using data to display ads that match user interests"
         },
         {
-            question: "18) What does Facebook use to personalize user experience on the platform?",
+            question: "18) What role do algorithms play in user engagement on social media?",
             options: [
-                { text: "Algorithms that analyze user data and behavior" },
-                { text: "Manual sorting of posts" },
-                { text: "Random post selection" },
-                { text: "User-only content generation" },
+                { text: "Enhancing privacy protections" },
+                { text: "Creating a digital footprint" },
+                { text: "Curating content based on user preferences" },
+                { text: "Improving cybersecurity" },
             ],
-            correct: "Algorithms that analyze user data and behavior"
+            correct: "Curating content based on user preferences"
         },
         {
-            question: "19) How does Facebook impact political engagement?",
+            question: "19) What is the main reason young users might undervalue privacy on social media?",
             options: [
-                { text: "It serves as a platform for political discussion and mobilization" },
-                { text: "It restricts political discourse" },
-                { text: "It bans all political content" },
-                { text: "It only allows government-approved messages" },
+                { text: "They are more focused on online learning" },
+                { text: "They have grown up in a digital environment" },
+                { text: "They understand the full extent of privacy risks" },
+                { text: "They prioritize long-term data use" },
             ],
-            correct: "It serves as a platform for political discussion and mobilization"
+            correct: "They have grown up in a digital environment"
         },
         {
-            question: "20) What is a concern about Facebook's influence on user privacy?",
+            question: "20) How does social media promote creativity?",
             options: [
-                { text: "It collects extensive personal data which may be shared with third parties" },
-                { text: "It never collects any user data" },
-                { text: "It only collects data with explicit user consent every time" },
-                { text: "It only shares data with non-profit organizations" },
+                { text: "By limiting user interactions" },
+                { text: "By providing a platform for sharing art and music" },
+                { text: "By reinforcing filter bubbles" },
+                { text: "By focusing on targeted advertising" },
             ],
-            correct: "It collects extensive personal data which may be shared with third parties"
+            correct: "By providing a platform for sharing art and music"
+        },
+        {
+            question: "21) Which law addresses data protection and privacy in the European Union?",
+            options: [
+                { text: "General Data Protection Regulation (GDPR)" },
+                { text: "California Consumer Privacy Act (CCPA)" },
+                { text: "Personal Data Protection Law (PDPL)" },
+                { text: "Echo Chamber Protection Act" },
+            ],
+            correct: "General Data Protection Regulation (GDPR)"
+        },
+        {
+            question: "22) What is an echo chamber in social media?",
+            options: [
+                { text: "A mechanism for targeted ads" },
+                { text: "An environment reinforcing users' existing beliefs" },
+                { text: "A tool for privacy protection" },
+                { text: "A platform for digital footprint management" },
+            ],
+            correct: "An environment reinforcing users' existing beliefs"
+        },
+        {
+            question: "23) What is the main concern with social media's use of location tracking?",
+            options: [
+                { text: "It aids in rapid communication" },
+                { text: "It may expose users to privacy risks" },
+                { text: "It helps in data curation" },
+                { text: "It reduces targeted advertising effectiveness" },
+            ],
+            correct: "It may expose users to privacy risks"
+        },
+        {
+            question: "24) Why are 'filter bubbles' seen as problematic?",
+            options: [
+                { text: "They limit exposure to different perspectives" },
+                { text: "They enhance privacy protection" },
+                { text: "They are cost-effective for businesses" },
+                { text: "They aid in online education" },
+            ],
+            correct: "They limit exposure to different perspectives"
+        },
+        {
+            question: "25) What is the impact of sharing personal information on social media?",
+            options: [
+                { text: "Increases cybersecurity" },
+                { text: "Creates a digital footprint" },
+                { text: "Reduces advertising effectiveness" },
+                { text: "Promotes collaborative learning" },
+            ],
+            correct: "Creates a digital footprint"
+        },
+        {
+            question: "26) How does disinformation on social media affect society?",
+            options: [
+                { text: "It spreads false information and influences public opinion" },
+                { text: "It provides educational resources" },
+                { text: "It enhances user privacy" },
+                { text: "It promotes targeted advertising" },
+            ],
+            correct: "It spreads false information and influences public opinion"
+        },
+        {
+            question: "27) Which social media feature enables rapid news sharing and updates?",
+            options: [
+                { text: "Information dissemination" },
+                { text: "Cyberbullying" },
+                { text: "Privacy settings" },
+                { text: "Educational content curation" },
+            ],
+            correct: "Information dissemination"
+        },
+        {
+            question: "28) What is the main concern with mental health and social media?",
+            options: [
+                { text: "Social comparison leading to anxiety and depression" },
+                { text: "Enhanced creativity" },
+                { text: "Improved privacy settings" },
+                { text: "Rapid information dissemination" },
+            ],
+            correct: "Social comparison leading to anxiety and depression"
+        },
+        {
+            question: "29) What is a common positive effect of social media on education?",
+            options: [
+                { text: "Promotes creative expression" },
+                { text: "Provides access to online learning resources" },
+                { text: "Increases data collection" },
+                { text: "Supports privacy concerns" },
+            ],
+            correct: "Provides access to online learning resources"
+        },
+        {
+            question: "30) Which legislation regulates data privacy in Saudi Arabia?",
+            options: [
+                { text: "General Data Protection Regulation (GDPR)" },
+                { text: "California Consumer Privacy Act (CCPA)" },
+                { text: "Personal Data Protection Law (PDPL)" },
+                { text: "Social Media Privacy Act" },
+            ],
+            correct: "Personal Data Protection Law (PDPL)"
         },
  ];
 
