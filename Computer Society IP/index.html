@@ -48,204 +48,304 @@
     <script>
 	const quizData = [
             {
-            question: "1) What is the primary purpose of intellectual property (IP) rights?",
+            question: "1) What does Intellectual Property (IP) refer to?",
             options: [
-                { text: "To protect creations of the mind, like inventions and artistic works" },
-                { text: "To make all information public" },
-                { text: "To prevent any commercialization of ideas" },
-                { text: "To limit access to public records" },
+                { text: "Inventions, literary and artistic works, designs and symbols, names and images used in commerce" },
+                { text: "Physical assets like real estate and tangible goods" },
+                { text: "Software that prevents copying of digital movies" },
+                { text: "Technological mechanisms built into hardware and software to prevent copying automatically" },
             ],
-            correct: "To protect creations of the mind, like inventions and artistic works"
+            correct: "Inventions, literary and artistic works, designs and symbols, names and images used in commerce"
         },
         {
-            question: "2) Which of the following is an example of intellectual property?",
+            question: "2) How does Intellectual Property differ from physical property?",
             options: [
-                { text: "A unique logo or brand symbol" },
-                { text: "Natural resources" },
-                { text: "Public land" },
-                { text: "An employeeâ€™s job title" },
+                { text: "It is tangible and involves physical assets" },
+                { text: "IP is intangible and involves ideas conceived in the mind" },
+                { text: "It includes software that prevents copying of digital movies" },
+                { text: "It automatically exists in original literary works" },
             ],
-            correct: "A unique logo or brand symbol"
+            correct: "IP is intangible and involves ideas conceived in the mind"
         },
         {
-            question: "3) Intellectual property is typically divided into which categories?",
+            question: "3) Which of the following is NOT a type of Intellectual Property?",
             options: [
-                { text: "Patents, trademarks, designs, and copyright" },
-                { text: "Real estate, stocks, bonds, and savings" },
-                { text: "Natural resources, financial assets, employment records" },
-                { text: "Government records, financial accounts, public documents" },
+                { text: "Patents" },
+                { text: "Trade Marks" },
+                { text: "Physical Real Estate" },
+                { text: "Registered designs" },
             ],
-            correct: "Patents, trademarks, designs, and copyright"
+            correct: "Physical Real Estate"
         },
         {
-            question: "4) Which of the following best describes a patent?",
+            question: "4) What is the main purpose of IP rights?",
             options: [
-                { text: "A right granted for an invention that provides a new way of doing something" },
-                { text: "Protection for aesthetic appearance only" },
-                { text: "A copyright for literary works" },
-                { text: "A logo used to represent a brand" },
+                { text: "To hinder competition in the marketplace" },
+                { text: "To reward research and development and prevent unauthorized exploitation of your rights" },
+                { text: "To allow free use of others' ideas" },
+                { text: "To criminalize the circumvention of copyright protections" },
             ],
-            correct: "A right granted for an invention that provides a new way of doing something"
+            correct: "To reward research and development and prevent unauthorized exploitation of your rights"
         },
         {
-            question: "5) What does copyright protect?",
+            question: "5) Which of the following can be considered a Trade Mark?",
             options: [
-                { text: "Original literary, musical, and artistic works" },
-                { text: "Inventions and industrial processes" },
-                { text: "Trade secrets" },
-                { text: "Government documents" },
+                { text: "Word, logo, sound, smell" },
+                { text: "Object code" },
+                { text: "Algorithms and source code" },
+                { text: "Software that prevents copying of digital movies" },
             ],
-            correct: "Original literary, musical, and artistic works"
+            correct: "Word, logo, sound, smell"
         },
         {
-            question: "6) Which of these items is likely protected by a trademark?",
+            question: "6) A good Trade Mark should be:",
             options: [
-                { text: "A company logo or brand name" },
-                { text: "A musical composition" },
-                { text: "A mechanical invention" },
-                { text: "A software algorithm" },
+                { text: "Descriptive of the product and common" },
+                { text: "Not descriptive of the product and distinctive" },
+                { text: "Similar to competitors' trademarks" },
+                { text: "Automatically exist in original literary works" },
             ],
-            correct: "A company logo or brand name"
+            correct: "Not descriptive of the product and distinctive"
         },
         {
-            question: "7) The main purpose of a trademark is to:",
+            question: "7) Which IP protection method protects the aesthetic appearance but not the underlying idea?",
             options: [
-                { text: "Distinguish the goods or services of one trader from those of another" },
-                { text: "Protect inventions only" },
-                { text: "Ensure that no one can copy text or music" },
-                { text: "Prevent artistic expression" },
+                { text: "Registered designs" },
+                { text: "Copyright" },
+                { text: "Patents" },
+                { text: "Trade Marks" },
             ],
-            correct: "Distinguish the goods or services of one trader from those of another"
+            correct: "Registered designs"
         },
         {
-            question: "8) Which of the following is protected under copyright?",
-            options: [
-                { text: "An original graphic design" },
-                { text: "An industrial process" },
-                { text: "A productâ€™s shape" },
-                { text: "A companyâ€™s financial records" },
-            ],
-            correct: "An original graphic design"
-        },
-        {
-            question: "9) The lifespan of copyright protection for literary works generally lasts:",
-            options: [
-                { text: "Life of the author plus 70 years" },
-                { text: "10 years" },
-                { text: "Unlimited duration" },
-                { text: "Only during the authorâ€™s lifetime" },
-            ],
-            correct: "Life of the author plus 70 years"
-        },
-        {
-            question: "10) Registered designs primarily protect:",
-            options: [
-                { text: "The aesthetic appearance of a product" },
-                { text: "Scientific methods" },
-                { text: "Musical compositions" },
-                { text: "Brand logos" },
-            ],
-            correct: "The aesthetic appearance of a product"
-        },
-        {
-            question: "11) Copyright protection extends to:",
-            options: [
-                { text: "Expressions of ideas, but not the ideas themselves" },
-                { text: "Any scientific theory" },
-                { text: "Mathematical concepts" },
-                { text: "Generic ideas without expression" },
-            ],
-            correct: "Expressions of ideas, but not the ideas themselves"
-        },
-        {
-            question: "12) What is 'Design Right' in intellectual property?",
-            options: [
-                { text: "Protection for the 3D shape and appearance of articles" },
-                { text: "A patent for a new process" },
-                { text: "A form of copyright for musical works" },
-                { text: "A public domain right" },
-            ],
-            correct: "Protection for the 3D shape and appearance of articles"
-        },
-        {
-            question: "13) Trademarks serve to:",
-            options: [
-                { text: "Establish goodwill and reputation in a product or service" },
-                { text: "Protect literary works" },
-                { text: "Identify new inventions" },
-                { text: "Secure intellectual property patents" },
-            ],
-            correct: "Establish goodwill and reputation in a product or service"
-        },
-        {
-            question: "14) Which of the following is NOT protected under copyright?",
-            options: [
-                { text: "An invention" },
-                { text: "A novel" },
-                { text: "A song" },
-                { text: "A painting" },
-            ],
-            correct: "An invention"
-        },
-        {
-            question: "15) Intellectual property protection helps promote:",
-            options: [
-                { text: "Innovation and fair competition" },
-                { text: "Unrestricted copying of works" },
-                { text: "Limiting access to information" },
-                { text: "Government ownership of ideas" },
-            ],
-            correct: "Innovation and fair competition"
-        },
-        {
-            question: "16) What is the maximum duration for a registered design?",
+            question: "8) What is the maximum duration of protection for a registered design?",
             options: [
                 { text: "25 years" },
-                { text: "10 years" },
-                { text: "Life of the author" },
-                { text: "70 years" },
+                { text: "Life of the creator plus 70 years" },
+                { text: "50 years" },
+                { text: "15 years" },
             ],
             correct: "25 years"
         },
         {
-            question: "17) Which of the following is NOT a type of intellectual property?",
+            question: "9) Which of the following automatically exists in original literary works?",
             options: [
-                { text: "Real estate title" },
-                { text: "Trademark" },
                 { text: "Patent" },
                 { text: "Copyright" },
+                { text: "Trade Mark" },
+                { text: "Fair Use Doctrine" },
             ],
-            correct: "Real estate title"
+            correct: "Copyright"
         },
         {
-            question: "18) Patents are granted for:",
+            question: "10) Which of the following is NOT protected by copyright?",
             options: [
-                { text: "Inventions that provide a new way of doing something or a technical solution" },
-                { text: "Literary and artistic works" },
-                { text: "Company logos and brand symbols" },
-                { text: "Personal information" },
+                { text: "Physical property like real estate" },
+                { text: "Literary works" },
+                { text: "Musical notation" },
+                { text: "Photographs" },
             ],
-            correct: "Inventions that provide a new way of doing something or a technical solution"
+            correct: "Physical property like real estate"
         },
         {
-            question: "19) The purpose of copyright is to:",
+            question: "11) What is the duration of copyright protection for literary works?",
             options: [
-                { text: "Give creators control over the use and distribution of their original works" },
-                { text: "Protect natural resources" },
-                { text: "Allow unlimited use of creative works" },
-                { text: "Provide lifetime ownership of real estate" },
+                { text: "Life of the creator plus 70 years" },
+                { text: "25 years" },
+                { text: "15 years" },
+                { text: "50 years" },
             ],
-            correct: "Give creators control over the use and distribution of their original works"
+            correct: "Life of the creator plus 70 years"
         },
         {
-            question: "20) In intellectual property, 'fair use' allows:",
+            question: "12) Which statement about software ownership is true?",
             options: [
-                { text: "Limited use of copyrighted material without permission under specific conditions" },
-                { text: "Unlimited copying of all materials" },
-                { text: "Use of any data for commercial purposes" },
-                { text: "Ownership transfer of intellectual property" },
+                { text: "Software ownership is simple and straightforward" },
+                { text: "Software is always protected by patents" },
+                { text: "Software ownership is complex due to the nature of software" },
+                { text: "Software cannot be protected by any IP rights" },
             ],
-            correct: "Limited use of copyrighted material without permission under specific conditions"
+            correct: "Software ownership is complex due to the nature of software"
+        },
+        {
+            question: "13) In the context of software, which represents the binary expression of a program?",
+            options: [
+                { text: "Source code" },
+                { text: "Object code" },
+                { text: "Algorithms" },
+                { text: "Registered designs" },
+            ],
+            correct: "Object code"
+        },
+        {
+            question: "14) According to WIPO, computer programs should be protected by which IP right?",
+            options: [
+                { text: "Patent" },
+                { text: "Trade Mark" },
+                { text: "Copyright" },
+                { text: "Registered design" },
+            ],
+            correct: "Copyright"
+        },
+        {
+            question: "15) Which of the following extends only to expressions, not to procedures or methods?",
+            options: [
+                { text: "Patent protection" },
+                { text: "Trade Mark protection" },
+                { text: "Copyright protection" },
+                { text: "Object code" },
+            ],
+            correct: "Copyright protection"
+        },
+        {
+            question: "16) What is DRM (Digital Rights Management)?",
+            options: [
+                { text: "An exclusive right granted for an invention" },
+                { text: "Technological mechanisms built into hardware and software to prevent copying automatically" },
+                { text: "A law criminalizing the circumvention of copyright protections" },
+                { text: "A software that allows unlimited copying of digital content" },
+            ],
+            correct: "Technological mechanisms built into hardware and software to prevent copying automatically"
+        },
+        {
+            question: "17) The Digital Millennium Copyright Act (DMCA) does which of the following?",
+            options: [
+                { text: "Allows free use of others' ideas" },
+                { text: "Criminalizes the circumvention of copyright protections" },
+                { text: "Abolishes all copyright laws" },
+                { text: "Protects aesthetic appearance, not the underlying idea" },
+            ],
+            correct: "Criminalizes the circumvention of copyright protections"
+        },
+        {
+            question: "18) Which is NOT one of the four factors considered in the Fair Use Doctrine?",
+            options: [
+                { text: "Purpose and nature of use" },
+                { text: "The color of the original work" },
+                { text: "Amount of significance or portion used" },
+                { text: "Effect of use on potential market or value" },
+            ],
+            correct: "The color of the original work"
+        },
+        {
+            question: "19) In the Sony v. Universal City Studios case, what did the Supreme Court decide?",
+            options: [
+                { text: "Copying movies for later viewing was fair use" },
+                { text: "Sharing music via copied MP3 files violated copyright" },
+                { text: "Makers of devices should be penalized if people use them to infringe copyright" },
+                { text: "Patent laws should apply to software" },
+            ],
+            correct: "Copying movies for later viewing was fair use"
+        },
+        {
+            question: "20) In the Napster case, what did the court rule?",
+            options: [
+                { text: "Sharing music via copied MP3 files violated copyright" },
+                { text: "Napster did not hurt industry sales" },
+                { text: "Sharing music is always fair use" },
+                { text: "Copying movies for later viewing was fair use" },
+            ],
+            correct: "Sharing music via copied MP3 files violated copyright"
+        },
+        {
+            question: "21) Which argument did Napster use to defend itself?",
+            options: [
+                { text: "The Sony decision allowed for entertainment use to be considered fair use" },
+                { text: "Songs and music are creative works and users were copying whole songs" },
+                { text: "It is a crime to investigate or explain how to get around DRM" },
+                { text: "Software ownership is complex due to the nature of software" },
+            ],
+            correct: "The Sony decision allowed for entertainment use to be considered fair use"
+        },
+        {
+            question: "22) According to RIAA's arguments against Napster, which is true?",
+            options: [
+                { text: "Sharing music via Napster did not hurt sales" },
+                { text: "Songs and music are creative works and users were copying whole songs" },
+                { text: "Personal use includes sharing with thousands of strangers" },
+                { text: "Napster was promoting industry sales" },
+            ],
+            correct: "Songs and music are creative works and users were copying whole songs"
+        },
+        {
+            question: "23) Which best describes a patent?",
+            options: [
+                { text: "An exclusive right granted for an invention that provides a new way of doing something" },
+                { text: "Automatically exists in original literary works" },
+                { text: "Used to distinguish products and services" },
+                { text: "Protects aesthetic appearance, not the underlying idea" },
+            ],
+            correct: "An exclusive right granted for an invention that provides a new way of doing something"
+        },
+        {
+            question: "24) Which statement is true about international software patent laws?",
+            options: [
+                { text: "All countries have the same laws regarding software patents" },
+                { text: "The law relating to the patentability of software is still not harmonized internationally" },
+                { text: "Software cannot be patented in any country" },
+                { text: "Patent laws for software are universally accepted" },
+            ],
+            correct: "The law relating to the patentability of software is still not harmonized internationally"
+        },
+        {
+            question: "25) What is the main challenge in protecting software under copyright law?",
+            options: [
+                { text: "Distinction between idea and expression is still difficult in the case of software" },
+                { text: "Software is not considered intellectual property" },
+                { text: "There is no challenge; software protection is straightforward" },
+                { text: "Copyright law fully covers all aspects of software protection" },
+            ],
+            correct: "Distinction between idea and expression is still difficult in the case of software"
+        },
+        {
+            question: "26) According to the Fair Use Doctrine, which factor is considered?",
+            options: [
+                { text: "Purpose and nature of useâ€”commercial or nonprofit" },
+                { text: "The popularity of the copyrighted work" },
+                { text: "The personal opinion of the user" },
+                { text: "The method used to copy the work" },
+            ],
+            correct: "Purpose and nature of useâ€”commercial or nonprofit"
+        },
+        {
+            question: "27) Which is an example of Digital Rights Management (DRM)?",
+            options: [
+                { text: "Software that prevents copying of digital movies" },
+                { text: "A device that allows unlimited copying of CDs" },
+                { text: "An act that allows circumvention of copyright protections" },
+                { text: "An exclusive right granted for an invention" },
+            ],
+            correct: "Software that prevents copying of digital movies"
+        },
+        {
+            question: "28) Which is NOT a component of the nature of software as discussed?",
+            options: [
+                { text: "Trade Marks" },
+                { text: "Algorithms" },
+                { text: "Source code" },
+                { text: "Object code" },
+            ],
+            correct: "Trade Marks"
+        },
+        {
+            question: "29) What was one argument against fair use in the Sony v. Universal City Studios case?",
+            options: [
+                { text: "People copied the entire work" },
+                { text: "Copying movies for later viewing was fair use" },
+                { text: "The movie studios could not demonstrate any harm" },
+                { text: "The device had legitimate uses" },
+            ],
+            correct: "People copied the entire work"
+        },
+        {
+            question: "30) What is the effect of the DMCA on explaining how to circumvent DRM?",
+            options: [
+                { text: "It is a crime to investigate or explain to others how to get around DRM" },
+                { text: "It allows the free sharing of methods to bypass DRM" },
+                { text: "There is no effect; it's legal to share such information" },
+                { text: "The DMCA permits circumvention for educational purposes" },
+            ],
+            correct: "It is a crime to investigate or explain to others how to get around DRM"
         },
  ];
 
