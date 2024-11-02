@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Society - Privacy in Data Transformation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body { 
+            font-family: Montserrat, 
+            sans-serif; 
+            max-width: 600px; 
+            margin: 50px auto; 
+            position: relative; 
+            background-color: #0c0c0c; 
+            color: #f0f0f0; 
+        }
+        .question-container { 
+            margin-bottom: 20px; 
+            box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.5); /* Adjust the shadow values as needed */
+            padding: 2px 8px 4px 8px;
+            background-color: #141414;
+        }
+        .option { cursor: pointer; padding: 8px; border: 1px solid #28282b; margin-bottom: 10px; transition: transform 0.2s ease; background-color: #28282b; color: #f0f0f0; display: flex; align-items: center; justify-content: space-between; }
+        .option img { max-width: 500px; height: auto; margin-left: 10px; flex-shrink: 0; } .option:hover { transform: scale(1.05); background-color: #555; }
+        .option:hover { transform: scale(1.05); background-color: #000000; }
+        .option:active { transform: scale(0.95); }
+        .option.selected { background-color: #7abaff; color: #000; }
+        .correct { background-color: #66bd69; position: relative; color: #000; }
+        .wrong { background-color: #df6158; position: relative; color: #000; }
+        .icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 20px; }
+        #submit-button { position: fixed; bottom: 20px; right: 20px; padding: 15px 30px; z-index: 1000; background-color: #7abaff; border: none; cursor: pointer; transition: transform 0.2s ease; font-size: 24px; }
+        #submit-button:hover { transform: scale(1.05); }
+        #submit-button:active { transform: scale(0.95); }
+        #timer { position: fixed; bottom: 90px; right: 20px; font-size: 24px; background-color: #28282b; color: #f0f0f0; padding: 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Computer Society - Privacy in Data Transformation</h1>
+    <div id="quiz"></div>
+    <div id="timer">Time: 0s</div>
+    <button id="submit-button">Submit Answers</button>
+    <audio id="select-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="select-submit-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="hover-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="submit-sound" src="data:audio/mpeg;base64,None"></audio>
+    <script>
+	const quizData = [
+            {
+            question: "1) In the context of digital transformation, privacy primarily concerns:",
+            options: [
+                { text: "The protection of personal and sensitive information" },
+                { text: "The promotion of open-access information" },
+                { text: "The increase of internet speed" },
+                { text: "The development of physical infrastructure" },
+            ],
+            correct: "The protection of personal and sensitive information"
+        },
+        {
+            question: "2) What is a major privacy risk associated with digital transformation?",
+            options: [
+                { text: "Unauthorized access to personal data" },
+                { text: "Limited access to digital services" },
+                { text: "Decreased connectivity" },
+                { text: "High cost of internet services" },
+            ],
+            correct: "Unauthorized access to personal data"
+        },
+        {
+            question: "3) Which of the following is an essential component of data privacy in digital transformation?",
+            options: [
+                { text: "Data encryption" },
+                { text: "Public access to all data" },
+                { text: "Elimination of data security controls" },
+                { text: "Unlimited data storage" },
+            ],
+            correct: "Data encryption"
+        },
+        {
+            question: "4) Privacy in digital transformation requires companies to:",
+            options: [
+                { text: "Collect and store only the data necessary for their operations" },
+                { text: "Collect all available data regardless of need" },
+                { text: "Avoid data protection policies" },
+                { text: "Ignore data retention limitations" },
+            ],
+            correct: "Collect and store only the data necessary for their operations"
+        },
+        {
+            question: "5) What is the role of data anonymization in digital privacy?",
+            options: [
+                { text: "To remove personally identifiable information (PII) from datasets" },
+                { text: "To make all data publicly accessible" },
+                { text: "To increase the accuracy of user data" },
+                { text: "To allow for unlimited data collection" },
+            ],
+            correct: "To remove personally identifiable information (PII) from datasets"
+        },
+        {
+            question: "6) The principle of 'Data Minimization' in digital privacy means:",
+            options: [
+                { text: "Collecting only the data that is absolutely necessary" },
+                { text: "Collecting all possible data for future use" },
+                { text: "Sharing data without restrictions" },
+                { text: "Storing data indefinitely" },
+            ],
+            correct: "Collecting only the data that is absolutely necessary"
+        },
+        {
+            question: "7) Which of the following is an example of personal data that needs protection?",
+            options: [
+                { text: "An individual's social security number" },
+                { text: "Publicly available weather data" },
+                { text: "General information about a company" },
+                { text: "A governmentâ€™s annual budget" },
+            ],
+            correct: "An individual's social security number"
+        },
+        {
+            question: "8) What is the main purpose of data encryption in digital privacy?",
+            options: [
+                { text: "To protect data from unauthorized access during transmission and storage" },
+                { text: "To allow public access to sensitive data" },
+                { text: "To simplify data collection processes" },
+                { text: "To increase data storage capacity" },
+            ],
+            correct: "To protect data from unauthorized access during transmission and storage"
+        },
+        {
+            question: "9) Which regulation is widely known for setting data privacy standards in digital transformation?",
+            options: [
+                { text: "GDPR (General Data Protection Regulation)" },
+                { text: "ISO 9001" },
+                { text: "The Freedom of Information Act" },
+                { text: "The Federal Register" },
+            ],
+            correct: "GDPR (General Data Protection Regulation)"
+        },
+        {
+            question: "10) Privacy by design means:",
+            options: [
+                { text: "Incorporating data protection from the beginning of system design" },
+                { text: "Leaving privacy concerns until the final stages of a project" },
+                { text: "Minimizing security protocols" },
+                { text: "Limiting privacy measures to only large companies" },
+            ],
+            correct: "Incorporating data protection from the beginning of system design"
+        },
+        {
+            question: "11) The purpose of 'Consent Management' in digital privacy is to:",
+            options: [
+                { text: "Ensure users agree to how their data is collected and used" },
+                { text: "Allow unrestricted data collection" },
+                { text: "Enable data sharing without user consent" },
+                { text: "Limit user access to their own data" },
+            ],
+            correct: "Ensure users agree to how their data is collected and used"
+        },
+        {
+            question: "12) What is a data breach in the context of digital privacy?",
+            options: [
+                { text: "Unauthorized access and exposure of sensitive information" },
+                { text: "A reduction in internet speed" },
+                { text: "A planned software update" },
+                { text: "An internal training exercise" },
+            ],
+            correct: "Unauthorized access and exposure of sensitive information"
+        },
+        {
+            question: "13) A Privacy Impact Assessment (PIA) is used to:",
+            options: [
+                { text: "Identify and mitigate risks to data privacy before a project is launched" },
+                { text: "Measure a company's profitability" },
+                { text: "Manage customer relations" },
+                { text: "Track digital transformation speed" },
+            ],
+            correct: "Identify and mitigate risks to data privacy before a project is launched"
+        },
+        {
+            question: "14) Which of these is considered sensitive personal data?",
+            options: [
+                { text: "Health records" },
+                { text: "Public business contact details" },
+                { text: "Information on weather patterns" },
+                { text: "Company quarterly earnings" },
+            ],
+            correct: "Health records"
+        },
+        {
+            question: "15) Which of the following is an impact of failing to protect user privacy?",
+            options: [
+                { text: "Loss of customer trust and possible legal consequences" },
+                { text: "Increased customer loyalty" },
+                { text: "Higher data accuracy" },
+                { text: "Increased data storage capacity" },
+            ],
+            correct: "Loss of customer trust and possible legal consequences"
+        },
+        {
+            question: "16) Which principle emphasizes that users should have control over their personal data?",
+            options: [
+                { text: "Data Subject Rights" },
+                { text: "Data Hoarding" },
+                { text: "Data Replication" },
+                { text: "Unrestricted Data Sharing" },
+            ],
+            correct: "Data Subject Rights"
+        },
+        {
+            question: "17) Privacy risks in digital transformation can arise from:",
+            options: [
+                { text: "Excessive data collection without clear purpose" },
+                { text: "Limiting data collection to only necessary information" },
+                { text: "Restricting access to user data" },
+                { text: "Securing all data with encryption" },
+            ],
+            correct: "Excessive data collection without clear purpose"
+        },
+        {
+            question: "18) The role of a Data Protection Officer (DPO) is to:",
+            options: [
+                { text: "Ensure that an organization complies with data protection laws and policies" },
+                { text: "Develop marketing strategies" },
+                { text: "Handle financial audits" },
+                { text: "Increase customer engagement" },
+            ],
+            correct: "Ensure that an organization complies with data protection laws and policies"
+        },
+        {
+            question: "19) In digital privacy, 'data retention' policies are used to:",
+            options: [
+                { text: "Define how long data should be stored and when it should be deleted" },
+                { text: "Ensure data is stored indefinitely" },
+                { text: "Increase storage space for data" },
+                { text: "Avoid any data collection practices" },
+            ],
+            correct: "Define how long data should be stored and when it should be deleted"
+        },
+        {
+            question: "20) Which of the following best describes the impact of digital transformation on privacy?",
+            options: [
+                { text: "It increases risks by expanding the amount and types of data collected and stored" },
+                { text: "It decreases the need for data security measures" },
+                { text: "It limits the collection of user information" },
+                { text: "It has no effect on personal data" },
+            ],
+            correct: "It increases risks by expanding the amount and types of data collected and stored"
+        },
+ ];
+
+        const quizContainer = document.getElementById('quiz');
+        const submitButton = document.getElementById('submit-button');
+
+        const selectSound = document.getElementById('select-sound');
+        const hoverSound = document.getElementById('hover-sound');
+        const submitSound = document.getElementById('submit-sound');
+        const selectSubmitSound = document.getElementById('select-submit-sound');
+
+        const timerElement = document.getElementById('timer');
+        let selectedAnswers = [];
+        let timer = 0;
+        let timerInterval;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizContainer.innerHTML = '';
+            selectedAnswers = new Array(quizData.length).fill(null);
+            quizData.forEach((data, index) => {
+                const questionContainer = document.createElement('div');
+                questionContainer.classList.add('question-container');
+
+                const questionElement = document.createElement('h3');
+                questionElement.innerHTML = `${index + 1}. ${data.question}`;
+                questionContainer.appendChild(questionElement);
+
+                if (data.image) {
+                    const questionImage = document.createElement('img');
+                    questionImage.src = data.image;
+                    questionImage.alt = "Question Image";
+                    questionImage.style.maxWidth = '100%';
+                    questionImage.style.marginBottom = '10px';
+                    questionContainer.appendChild(questionImage);
+                }
+
+                const options = [...data.options];
+                shuffle(options);
+
+                options.forEach(option => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add('option');
+                    optionElement.textContent = option.text;
+
+                    if (option.image) {
+                        const optionImage = document.createElement('img');
+                        optionImage.src = option.image;
+                        optionImage.alt = "Option Image";
+                        optionImage.style.maxWidth = '500px';
+                        optionImage.style.marginLeft = '10px';
+                        optionElement.appendChild(optionImage);
+                    }
+
+                    optionElement.addEventListener('mouseenter', () => {
+                        hoverSound.currentTime = 0;  // Reset the hover audio to the start
+                        hoverSound.play();  // Play the hover sound
+                    });
+
+                    optionElement.addEventListener('click', () => {
+                        selectSound.currentTime = 0;
+                        selectSound.play();
+                        if (selectedAnswers[index] === option.text) {
+                            selectedAnswers[index] = null;
+                            optionElement.classList.remove('selected');
+                        } else {
+                            selectedAnswers[index] = option.text;
+                            Array.from(questionContainer.getElementsByClassName('option')).forEach(opt => opt.classList.remove('selected'));
+                            optionElement.classList.add('selected');
+                        }
+                    });
+                    questionContainer.appendChild(optionElement);
+                });
+
+                quizContainer.appendChild(questionContainer);
+            });
+        }
+
+        function startTimer() {
+            timer = 0;
+            timerElement.textContent = `Time: ${timer}s`;
+            timerInterval = setInterval(() => {
+                timer++;
+                timerElement.textContent = `Time: ${timer}s`;
+            }, 1000);
+        }
+
+        submitButton.addEventListener('click', () => {
+            selectSubmitSound.currentTime = 0;
+            selectSubmitSound.play();
+            if (submitButton.textContent === 'Submit Answers') {
+                submitSound.currentTime = 0;
+                submitSound.play();
+                clearInterval(timerInterval);
+                let score = 0;
+                quizContainer.innerHTML = '';
+                quizData.forEach((data, index) => {
+                    const questionContainer = document.createElement('div');
+                    questionContainer.classList.add('question-container');
+
+                    const questionElement = document.createElement('h3');
+                    questionElement.innerHTML = `${index + 1}. ${data.question}`;
+                    questionContainer.appendChild(questionElement);
+
+                    if (data.image) {
+                        const questionImage = document.createElement('img');
+                        questionImage.src = data.image;
+                        questionImage.alt = "Question Image";
+                        questionImage.style.maxWidth = '100%';
+                        questionImage.style.marginBottom = '10px';
+                        questionContainer.appendChild(questionImage);
+                    }
+
+                    data.options.forEach(option => {
+                        const optionElement = document.createElement('div');
+                        optionElement.classList.add('option');
+                        optionElement.textContent = option.text;
+
+                        if (option.image) {
+                            const optionImage = document.createElement('img');
+                            optionImage.src = option.image;
+                            optionImage.alt = "Option Image";
+                            optionImage.style.maxWidth = '500px';
+                            optionImage.style.marginLeft = '10px';
+                            optionElement.appendChild(optionImage);
+                        }
+
+                        if (option.text === data.correct) {
+                            if (selectedAnswers[index] === option.text) {
+                                score++;
+                                optionElement.classList.add('correct');
+                                const tickIcon = document.createElement('span');
+                                tickIcon.classList.add('icon');
+                                tickIcon.textContent = '✔';
+                                optionElement.appendChild(tickIcon);
+                            } else {
+                                optionElement.classList.add('correct');
+                            }
+                        } else if (selectedAnswers[index] === option.text) {
+                            optionElement.classList.add('wrong');
+                            const crossIcon = document.createElement('span');
+                            crossIcon.classList.add('icon');
+                            crossIcon.textContent = '✖';
+                            optionElement.appendChild(crossIcon);
+                        }
+                        questionContainer.appendChild(optionElement);
+                    });
+
+                    quizContainer.appendChild(questionContainer);
+                });
+
+                timerElement.textContent = `Your score: ${score}/${quizData.length}`;
+                submitButton.textContent = 'Retake';
+            } else if (submitButton.textContent === 'Retake') {
+                loadQuiz();
+                startTimer();
+                submitButton.textContent = 'Submit Answers';
+            }
+        });
+
+        loadQuiz();
+        startTimer();
+    </script>
+</body>
+</html>
