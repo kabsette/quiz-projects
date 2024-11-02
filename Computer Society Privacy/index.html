@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Computer Society - Privacy in Data Transformation</title>
+    <title>Computer Society - Privacy</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
@@ -37,7 +37,7 @@
     </style>
 </head>
 <body>
-    <h1>Computer Society - Privacy in Data Transformation</h1>
+    <h1>Computer Society - Privacy</h1>
     <div id="quiz"></div>
     <div id="timer">Time: 0s</div>
     <button id="submit-button">Submit Answers</button>
@@ -48,204 +48,304 @@
     <script>
 	const quizData = [
             {
-            question: "1) In the context of digital transformation, privacy primarily concerns:",
+            question: "1) Privacy is primarily defined as which of the following in the digital transformation era?",
             options: [
-                { text: "The protection of personal and sensitive information" },
-                { text: "The promotion of open-access information" },
-                { text: "The increase of internet speed" },
-                { text: "The development of physical infrastructure" },
+                { text: "The right to keep personal information and activities free from surveillance or interference" },
+                { text: "The ability to access government and private databases" },
+                { text: "Data mining to find patterns in large datasets" },
+                { text: "The practice of combining and comparing information from different databases" },
             ],
-            correct: "The protection of personal and sensitive information"
+            correct: "The right to keep personal information and activities free from surveillance or interference"
         },
         {
-            question: "2) What is a major privacy risk associated with digital transformation?",
+            question: "2) Which key aspect of privacy refers to being left alone without intrusion?",
             options: [
-                { text: "Unauthorized access to personal data" },
-                { text: "Limited access to digital services" },
-                { text: "Decreased connectivity" },
-                { text: "High cost of internet services" },
+                { text: "Control of information about oneself" },
+                { text: "Freedom from surveillance" },
+                { text: "Freedom from intrusion" },
+                { text: "Invisible information gathering" },
             ],
-            correct: "Unauthorized access to personal data"
+            correct: "Freedom from intrusion"
         },
         {
-            question: "3) Which of the following is an essential component of data privacy in digital transformation?",
+            question: "3) What term describes the collection of personal information without the person's knowledge?",
             options: [
-                { text: "Data encryption" },
-                { text: "Public access to all data" },
-                { text: "Elimination of data security controls" },
-                { text: "Unlimited data storage" },
+                { text: "Invisible information gathering" },
+                { text: "Secondary use" },
+                { text: "Opt-in policy" },
+                { text: "Data retention" },
             ],
-            correct: "Data encryption"
+            correct: "Invisible information gathering"
         },
         {
-            question: "4) Privacy in digital transformation requires companies to:",
+            question: "4) Using personal information for a purpose other than the one it was provided for is known as what?",
             options: [
-                { text: "Collect and store only the data necessary for their operations" },
-                { text: "Collect all available data regardless of need" },
-                { text: "Avoid data protection policies" },
-                { text: "Ignore data retention limitations" },
+                { text: "Secondary use" },
+                { text: "Data mining" },
+                { text: "Informed consent" },
+                { text: "Computer profiling" },
             ],
-            correct: "Collect and store only the data necessary for their operations"
+            correct: "Secondary use"
         },
         {
-            question: "5) What is the role of data anonymization in digital privacy?",
+            question: "5) Searching and analyzing masses of data to find patterns and develop new knowledge is called?",
             options: [
-                { text: "To remove personally identifiable information (PII) from datasets" },
-                { text: "To make all data publicly accessible" },
-                { text: "To increase the accuracy of user data" },
-                { text: "To allow for unlimited data collection" },
+                { text: "Data mining" },
+                { text: "Computer matching" },
+                { text: "Opt-out policy" },
+                { text: "Fair Information Principles" },
             ],
-            correct: "To remove personally identifiable information (PII) from datasets"
+            correct: "Data mining"
         },
         {
-            question: "6) The principle of 'Data Minimization' in digital privacy means:",
+            question: "6) Which term refers to combining and comparing information from different databases?",
             options: [
-                { text: "Collecting only the data that is absolutely necessary" },
-                { text: "Collecting all possible data for future use" },
-                { text: "Sharing data without restrictions" },
-                { text: "Storing data indefinitely" },
+                { text: "Computer matching" },
+                { text: "Computer profiling" },
+                { text: "Data retention" },
+                { text: "Opt-in policy" },
             ],
-            correct: "Collecting only the data that is absolutely necessary"
+            correct: "Computer matching"
         },
         {
-            question: "7) Which of the following is an example of personal data that needs protection?",
+            question: "7) Analyzing data to determine characteristics of people most likely to engage in certain behavior is known as what?",
             options: [
-                { text: "An individual's social security number" },
-                { text: "Publicly available weather data" },
-                { text: "General information about a company" },
-                { text: "A governmentâ€™s annual budget" },
+                { text: "Computer profiling" },
+                { text: "Informed consent" },
+                { text: "Invisible information gathering" },
+                { text: "Opt-out policy" },
             ],
-            correct: "An individual's social security number"
+            correct: "Computer profiling"
         },
         {
-            question: "8) What is the main purpose of data encryption in digital privacy?",
+            question: "8) What principle involves individuals giving permission before their data is collected and used?",
             options: [
-                { text: "To protect data from unauthorized access during transmission and storage" },
-                { text: "To allow public access to sensitive data" },
-                { text: "To simplify data collection processes" },
-                { text: "To increase data storage capacity" },
+                { text: "Informed consent" },
+                { text: "Data mining" },
+                { text: "Secondary use" },
+                { text: "Opt-out policy" },
             ],
-            correct: "To protect data from unauthorized access during transmission and storage"
+            correct: "Informed consent"
         },
         {
-            question: "9) Which regulation is widely known for setting data privacy standards in digital transformation?",
+            question: "9) Which policy allows individuals to choose not to participate in data collection?",
             options: [
-                { text: "GDPR (General Data Protection Regulation)" },
-                { text: "ISO 9001" },
-                { text: "The Freedom of Information Act" },
-                { text: "The Federal Register" },
+                { text: "Opt-out policy" },
+                { text: "Opt-in policy" },
+                { text: "Data retention" },
+                { text: "Fair Information Principles" },
             ],
-            correct: "GDPR (General Data Protection Regulation)"
+            correct: "Opt-out policy"
         },
         {
-            question: "10) Privacy by design means:",
+            question: "10) The practice of keeping personal data for a specified period refers to what?",
             options: [
-                { text: "Incorporating data protection from the beginning of system design" },
-                { text: "Leaving privacy concerns until the final stages of a project" },
-                { text: "Minimizing security protocols" },
-                { text: "Limiting privacy measures to only large companies" },
+                { text: "Data retention" },
+                { text: "Informed consent" },
+                { text: "Computer matching" },
+                { text: "Invisible information gathering" },
             ],
-            correct: "Incorporating data protection from the beginning of system design"
+            correct: "Data retention"
         },
         {
-            question: "11) The purpose of 'Consent Management' in digital privacy is to:",
+            question: "11) Which principle includes policies that govern the ethical handling of personal data?",
             options: [
-                { text: "Ensure users agree to how their data is collected and used" },
-                { text: "Allow unrestricted data collection" },
-                { text: "Enable data sharing without user consent" },
-                { text: "Limit user access to their own data" },
+                { text: "Fair Information Principles" },
+                { text: "Opt-in policy" },
+                { text: "Secondary use" },
+                { text: "Data mining" },
             ],
-            correct: "Ensure users agree to how their data is collected and used"
+            correct: "Fair Information Principles"
         },
         {
-            question: "12) What is a data breach in the context of digital privacy?",
+            question: "12) Targeted marketing often relies on which of the following practices?",
             options: [
-                { text: "Unauthorized access and exposure of sensitive information" },
-                { text: "A reduction in internet speed" },
-                { text: "A planned software update" },
-                { text: "An internal training exercise" },
+                { text: "Data mining" },
+                { text: "Informed consent" },
+                { text: "Freedom from intrusion" },
+                { text: "Opt-out policy" },
             ],
-            correct: "Unauthorized access and exposure of sensitive information"
+            correct: "Data mining"
         },
         {
-            question: "13) A Privacy Impact Assessment (PIA) is used to:",
+            question: "13) What technology allows services to know exactly where a person is at a particular time?",
             options: [
-                { text: "Identify and mitigate risks to data privacy before a project is launched" },
-                { text: "Measure a company's profitability" },
-                { text: "Manage customer relations" },
-                { text: "Track digital transformation speed" },
+                { text: "Global Positioning Systems (GPS)" },
+                { text: "Biometric technologies" },
+                { text: "Computer profiling" },
+                { text: "Invisible information gathering" },
             ],
-            correct: "Identify and mitigate risks to data privacy before a project is launched"
+            correct: "Global Positioning Systems (GPS)"
         },
         {
-            question: "14) Which of these is considered sensitive personal data?",
+            question: "14) Which is a common privacy threat involving unauthorized access to personal data?",
             options: [
-                { text: "Health records" },
-                { text: "Public business contact details" },
-                { text: "Information on weather patterns" },
-                { text: "Company quarterly earnings" },
+                { text: "Data breaches" },
+                { text: "Opt-in policy" },
+                { text: "Informed consent" },
+                { text: "Data retention" },
             ],
-            correct: "Health records"
+            correct: "Data breaches"
         },
         {
-            question: "15) Which of the following is an impact of failing to protect user privacy?",
+            question: "15) Collecting personal data through online activities, IoT devices, and social media contributes to what?",
             options: [
-                { text: "Loss of customer trust and possible legal consequences" },
-                { text: "Increased customer loyalty" },
-                { text: "Higher data accuracy" },
-                { text: "Increased data storage capacity" },
+                { text: "Digital footprints" },
+                { text: "Opt-out policy" },
+                { text: "Freedom from surveillance" },
+                { text: "Computer matching" },
             ],
-            correct: "Loss of customer trust and possible legal consequences"
+            correct: "Digital footprints"
         },
         {
-            question: "16) Which principle emphasizes that users should have control over their personal data?",
+            question: "16) Which act is a key data privacy regulation in the European Union?",
             options: [
-                { text: "Data Subject Rights" },
-                { text: "Data Hoarding" },
-                { text: "Data Replication" },
-                { text: "Unrestricted Data Sharing" },
+                { text: "General Data Protection Regulation (GDPR)" },
+                { text: "Health Insurance Portability and Accountability Act (HIPAA)" },
+                { text: "California Consumer Privacy Act (CCPA)" },
+                { text: "Personal Data Protection Law (PDPL)" },
             ],
-            correct: "Data Subject Rights"
+            correct: "General Data Protection Regulation (GDPR)"
         },
         {
-            question: "17) Privacy risks in digital transformation can arise from:",
+            question: "17) The Health Insurance Portability and Accountability Act (HIPAA) is associated with data privacy in which sector?",
             options: [
-                { text: "Excessive data collection without clear purpose" },
-                { text: "Limiting data collection to only necessary information" },
-                { text: "Restricting access to user data" },
-                { text: "Securing all data with encryption" },
+                { text: "Healthcare in the United States" },
+                { text: "Consumer data in Europe" },
+                { text: "Electronic documents in Canada" },
+                { text: "Personal data in Saudi Arabia" },
             ],
-            correct: "Excessive data collection without clear purpose"
+            correct: "Healthcare in the United States"
         },
         {
-            question: "18) The role of a Data Protection Officer (DPO) is to:",
+            question: "18) What is the term for the vast amount of data generated daily by individuals online?",
             options: [
-                { text: "Ensure that an organization complies with data protection laws and policies" },
-                { text: "Develop marketing strategies" },
-                { text: "Handle financial audits" },
-                { text: "Increase customer engagement" },
+                { text: "Digital footprints" },
+                { text: "Data retention" },
+                { text: "Computer profiling" },
+                { text: "Secondary use" },
             ],
-            correct: "Ensure that an organization complies with data protection laws and policies"
+            correct: "Digital footprints"
         },
         {
-            question: "19) In digital privacy, 'data retention' policies are used to:",
+            question: "19) Which of the following is a risk associated with biometric technologies?",
             options: [
-                { text: "Define how long data should be stored and when it should be deleted" },
-                { text: "Ensure data is stored indefinitely" },
-                { text: "Increase storage space for data" },
-                { text: "Avoid any data collection practices" },
+                { text: "Vulnerability of data" },
+                { text: "Informed consent" },
+                { text: "Freedom from intrusion" },
+                { text: "Opt-in policy" },
             ],
-            correct: "Define how long data should be stored and when it should be deleted"
+            correct: "Vulnerability of data"
         },
         {
-            question: "20) Which of the following best describes the impact of digital transformation on privacy?",
+            question: "20) The practice of paying for consumer information to create profiles is known as what?",
             options: [
-                { text: "It increases risks by expanding the amount and types of data collected and stored" },
-                { text: "It decreases the need for data security measures" },
-                { text: "It limits the collection of user information" },
-                { text: "It has no effect on personal data" },
+                { text: "Data firms and consumer profiles" },
+                { text: "Opt-out policy" },
+                { text: "Informed consent" },
+                { text: "Fair Information Principles" },
             ],
-            correct: "It increases risks by expanding the amount and types of data collected and stored"
+            correct: "Data firms and consumer profiles"
+        },
+        {
+            question: "21) Young people may put less value on privacy than previous generations because they might not do what?",
+            options: [
+                { text: "Understand the risks" },
+                { text: "Use opt-in policies" },
+                { text: "Practice data retention" },
+                { text: "Engage in data mining" },
+            ],
+            correct: "Understand the risks"
+        },
+        {
+            question: "22) Which regulation enhances data protection for residents of California?",
+            options: [
+                { text: "California Consumer Privacy Act (CCPA)" },
+                { text: "General Data Protection Regulation (GDPR)" },
+                { text: "Health Insurance Portability and Accountability Act (HIPAA)" },
+                { text: "Personal Information Protection and Electronic Documents Act (PIPEDA)" },
+            ],
+            correct: "California Consumer Privacy Act (CCPA)"
+        },
+        {
+            question: "23) What is the right to control information about oneself an aspect of?",
+            options: [
+                { text: "Privacy" },
+                { text: "Data mining" },
+                { text: "Computer matching" },
+                { text: "Opt-out policy" },
+            ],
+            correct: "Privacy"
+        },
+        {
+            question: "24) Which country's data protection law is known as the Personal Data Protection Law (PDPL)?",
+            options: [
+                { text: "Saudi Arabia" },
+                { text: "Canada" },
+                { text: "United States" },
+                { text: "European Union" },
+            ],
+            correct: "Saudi Arabia"
+        },
+        {
+            question: "25) The practice of tracking users' online activities to deliver targeted advertising is called what?",
+            options: [
+                { text: "Targeted marketing" },
+                { text: "Invisible information gathering" },
+                { text: "Informed consent" },
+                { text: "Data retention" },
+            ],
+            correct: "Targeted marketing"
+        },
+        {
+            question: "26) Which principle requires that individuals be informed about data collection and its purposes?",
+            options: [
+                { text: "Informed consent" },
+                { text: "Data mining" },
+                { text: "Secondary use" },
+                { text: "Opt-in policy" },
+            ],
+            correct: "Informed consent"
+        },
+        {
+            question: "27) Surveillance cameras used by companies for tracking are examples of what practice?",
+            options: [
+                { text: "Location tracking" },
+                { text: "Data retention" },
+                { text: "Fair Information Principles" },
+                { text: "Computer profiling" },
+            ],
+            correct: "Location tracking"
+        },
+        {
+            question: "28) The Personal Information Protection and Electronic Documents Act (PIPEDA) is a key data privacy regulation in which country?",
+            options: [
+                { text: "Canada" },
+                { text: "United States" },
+                { text: "Saudi Arabia" },
+                { text: "European Union" },
+            ],
+            correct: "Canada"
+        },
+        {
+            question: "29) Collecting personal data through IoT devices contributes to what?",
+            options: [
+                { text: "Collection of personal data" },
+                { text: "Opt-in policies" },
+                { text: "Fair Information Principles" },
+                { text: "Freedom from intrusion" },
+            ],
+            correct: "Collection of personal data"
+        },
+        {
+            question: "30) Which of the following is NOT a common privacy threat in today's digital world?",
+            options: [
+                { text: "Informed consent" },
+                { text: "Data breaches" },
+                { text: "Identity theft" },
+                { text: "Surveillance" },
+            ],
+            correct: "Informed consent"
         },
  ];
 
