@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Society - Personal Data Protection Law</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body { 
+            font-family: Montserrat, 
+            sans-serif; 
+            max-width: 600px; 
+            margin: 50px auto; 
+            position: relative; 
+            background-color: #0c0c0c; 
+            color: #f0f0f0; 
+        }
+        .question-container { 
+            margin-bottom: 20px; 
+            box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.5); /* Adjust the shadow values as needed */
+            padding: 2px 8px 4px 8px;
+            background-color: #141414;
+        }
+        .option { cursor: pointer; padding: 8px; border: 1px solid #28282b; margin-bottom: 10px; transition: transform 0.2s ease; background-color: #28282b; color: #f0f0f0; display: flex; align-items: center; justify-content: space-between; }
+        .option img { max-width: 500px; height: auto; margin-left: 10px; flex-shrink: 0; } .option:hover { transform: scale(1.05); background-color: #555; }
+        .option:hover { transform: scale(1.05); background-color: #000000; }
+        .option:active { transform: scale(0.95); }
+        .option.selected { background-color: #7abaff; color: #000; }
+        .correct { background-color: #66bd69; position: relative; color: #000; }
+        .wrong { background-color: #df6158; position: relative; color: #000; }
+        .icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 20px; }
+        #submit-button { position: fixed; bottom: 20px; right: 20px; padding: 15px 30px; z-index: 1000; background-color: #7abaff; border: none; cursor: pointer; transition: transform 0.2s ease; font-size: 24px; }
+        #submit-button:hover { transform: scale(1.05); }
+        #submit-button:active { transform: scale(0.95); }
+        #timer { position: fixed; bottom: 90px; right: 20px; font-size: 24px; background-color: #28282b; color: #f0f0f0; padding: 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Computer Society - Personal Data Protection Law</h1>
+    <div id="quiz"></div>
+    <div id="timer">Time: 0s</div>
+    <button id="submit-button">Submit Answers</button>
+    <audio id="select-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="select-submit-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="hover-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="submit-sound" src="data:audio/mpeg;base64,None"></audio>
+    <script>
+	const quizData = [
+            {
+            question: "1) What is the main objective of Saudi Arabia's Personal Data Protection Law (PDPL)?",
+            options: [
+                { text: "To reward research and development and prevent unauthorized exploitation of rights" },
+                { text: "To ensure personal data is processed fairly, lawfully, transparently, and securely" },
+                { text: "To protect individuals' privacy and their personal data rights" },
+                { text: "To limit personal data collected to what is necessary for the intended purpose" },
+            ],
+            correct: "To protect individuals' privacy and their personal data rights"
+        },
+        {
+            question: "2) As of which date must businesses operating in Saudi Arabia comply with the PDPL?",
+            options: [
+                { text: "September 14, 2024" },
+                { text: "Life of the creator plus 70 years" },
+                { text: "September 14, 2023" },
+                { text: "September 14, 2025" },
+            ],
+            correct: "September 14, 2024"
+        },
+        {
+            question: "3) Which activities involving personal data are governed by the PDPL?",
+            options: [
+                { text: "Only collecting and storing personal data" },
+                { text: "Collecting, using, storing, sharing, transferring, or updating personal data" },
+                { text: "Analyzing data to determine characteristics of people most likely to engage in certain behavior" },
+                { text: "Combining and comparing information from different databases" },
+            ],
+            correct: "Collecting, using, storing, sharing, transferring, or updating personal data"
+        },
+        {
+            question: "4) One of the objectives of the PDPL is to ensure entities process personal data per which principles?",
+            options: [
+                { text: "Fairly, lawfully, transparently, and securely" },
+                { text: "Automatically exists in original literary works" },
+                { text: "To reward research and development and prevent unauthorized exploitation" },
+                { text: "Encrypting data and implementing access controls" },
+            ],
+            correct: "Fairly, lawfully, transparently, and securely"
+        },
+        {
+            question: "5) What does 'Data Minimization' mean in personal data protection policies?",
+            options: [
+                { text: "Collecting as much data as possible for future use" },
+                { text: "Limiting personal data collected to what is necessary for the intended purpose" },
+                { text: "Procedures for identifying, reporting, and responding to data breaches" },
+                { text: "Sharing personal data with third parties without restrictions" },
+            ],
+            correct: "Limiting personal data collected to what is necessary for the intended purpose"
+        },
+        {
+            question: "6) Under data protection policies, individuals should have which option regarding consent?",
+            options: [
+                { text: "To withdraw consent at any time" },
+                { text: "To automatically accept all data processing activities" },
+                { text: "To share their data with marketing agencies" },
+                { text: "To access, rectify, erase, and restrict the processing of their data" },
+            ],
+            correct: "To withdraw consent at any time"
+        },
+        {
+            question: "7) Which is a key component of 'Data Security' measures?",
+            options: [
+                { text: "Encrypting data and implementing access controls" },
+                { text: "Retaining personal data indefinitely" },
+                { text: "Collecting personal data without consent" },
+                { text: "Establishing goodwill and reputation in a product or service" },
+            ],
+            correct: "Encrypting data and implementing access controls"
+        },
+        {
+            question: "8) What should data protection policies specify regarding 'Data Access and Sharing'?",
+            options: [
+                { text: "Who has access to personal data and under what circumstances data is shared with third parties" },
+                { text: "That all employees have unrestricted access to personal data" },
+                { text: "Procedures for regular audits and monitoring of data protection compliance" },
+                { text: "Mechanisms to ensure adequate data protection during international transfers" },
+            ],
+            correct: "Who has access to personal data and under what circumstances data is shared with third parties"
+        },
+        {
+            question: "9) 'Data Retention' policies should include which of the following?",
+            options: [
+                { text: "Clear guidelines on how long personal data is retained and criteria for determining retention periods" },
+                { text: "Procedures for ignoring data breaches" },
+                { text: "Automatically existing in original literary works" },
+                { text: "Designating roles and responsibilities for data protection within the organization" },
+            ],
+            correct: "Clear guidelines on how long personal data is retained and criteria for determining retention periods"
+        },
+        {
+            question: "10) Data protection policies should inform individuals about their rights, including:",
+            options: [
+                { text: "The right to establish goodwill and reputation in a product or service" },
+                { text: "The right to access, rectify, erase, and restrict the processing of their data" },
+                { text: "The right to combine and compare information from different databases" },
+                { text: "The right to criminalize the circumvention of copyright protections" },
+            ],
+            correct: "The right to access, rectify, erase, and restrict the processing of their data"
+        },
+        {
+            question: "11) What should organizations include in their policies regarding 'Data Breach Notification'?",
+            options: [
+                { text: "Procedures for identifying, reporting, and responding to data breaches" },
+                { text: "Mechanisms to ensure data is collected only for legitimate purposes" },
+                { text: "Methods for data mining and profiling" },
+                { text: "Practices to reward research and development" },
+            ],
+            correct: "Procedures for identifying, reporting, and responding to data breaches"
+        },
+        {
+            question: "12) Assigning roles and responsibilities for data protection within the organization refers to:",
+            options: [
+                { text: "Accountability and Responsibility" },
+                { text: "Data Minimization" },
+                { text: "Informed Consent" },
+                { text: "Invisible Information Gathering" },
+            ],
+            correct: "Accountability and Responsibility"
+        },
+        {
+            question: "13) Why is 'Training and Awareness' important in data protection policies?",
+            options: [
+                { text: "To ensure employees understand and adhere to data protection requirements" },
+                { text: "To allow unrestricted data sharing" },
+                { text: "To facilitate data mining and profiling" },
+                { text: "To extend copyright protection to software" },
+            ],
+            correct: "To ensure employees understand and adhere to data protection requirements"
+        },
+        {
+            question: "14) When personal data is transferred internationally, what should policies specify?",
+            options: [
+                { text: "Mechanisms to ensure adequate data protection during such transfers" },
+                { text: "That data can be shared without any restrictions" },
+                { text: "Procedures for data matching and profiling" },
+                { text: "That consent is not required for international transfers" },
+            ],
+            correct: "Mechanisms to ensure adequate data protection during such transfers"
+        },
+        {
+            question: "15) In the context of 'Third-Party Contracts', what is required?",
+            options: [
+                { text: "Third parties must comply with data protection standards and outline contractual terms" },
+                { text: "Third parties are exempt from data protection laws" },
+                { text: "No contracts are necessary with third parties" },
+                { text: "Procedures for identifying, reporting, and responding to data breaches" },
+            ],
+            correct: "Third parties must comply with data protection standards and outline contractual terms"
+        },
+        {
+            question: "16) What is the purpose of 'Compliance and Monitoring' procedures?",
+            options: [
+                { text: "To establish mechanisms for regular audits and monitoring of data protection compliance" },
+                { text: "To promote the unauthorized exploitation of personal data" },
+                { text: "To limit data collection to what is necessary" },
+                { text: "To protect the aesthetic appearance of products" },
+            ],
+            correct: "To establish mechanisms for regular audits and monitoring of data protection compliance"
+        },
+        {
+            question: "17) Why should policies be reviewed and updated periodically?",
+            options: [
+                { text: "To reflect changes in laws, regulations, or the organization's data processing activities" },
+                { text: "To remove data protection measures over time" },
+                { text: "To extend copyright protection to new works" },
+                { text: "To ignore data breach notifications" },
+            ],
+            correct: "To reflect changes in laws, regulations, or the organization's data processing activities"
+        },
+        {
+            question: "18) How should 'Complaints and Dispute Resolution' be addressed in data protection policies?",
+            options: [
+                { text: "By providing information on how individuals can file complaints and seek resolution" },
+                { text: "By ignoring complaints from individuals" },
+                { text: "By prohibiting individuals from filing complaints" },
+                { text: "By facilitating data mining and profiling" },
+            ],
+            correct: "By providing information on how individuals can file complaints and seek resolution"
+        },
+        {
+            question: "19) In the Saudi PDPL, what is a key aspect of 'Data Subject Rights'?",
+            options: [
+                { text: "Individuals can exercise rights such as access, correction, and deletion of their data" },
+                { text: "Individuals have no rights over their personal data" },
+                { text: "Data subjects must pay a fee to exercise their rights" },
+                { text: "To ensure employees understand and adhere to data protection requirements" },
+            ],
+            correct: "Individuals can exercise rights such as access, correction, and deletion of their data"
+        },
+        {
+            question: "20) Under PDPL, when transferring data internationally, organizations must:",
+            options: [
+                { text: "Ensure compliance with Saudi regulations regarding cross-border data transfers" },
+                { text: "Transfer data without any legal considerations" },
+                { text: "Avoid informing data subjects about international transfers" },
+                { text: "Encrypt data and implement access controls" },
+            ],
+            correct: "Ensure compliance with Saudi regulations regarding cross-border data transfers"
+        },
+        {
+            question: "21) Which of the following is NOT a lawful basis for data processing under PDPL?",
+            options: [
+                { text: "Consent from the data subject" },
+                { text: "Desire to increase marketing database without consent" },
+                { text: "Legal obligation" },
+                { text: "Vital interests of the data subject" },
+            ],
+            correct: "Desire to increase marketing database without consent"
+        },
+        {
+            question: "22) What does 'Data Minimization' aim to prevent?",
+            options: [
+                { text: "Collecting excessive personal data not necessary for the intended purpose" },
+                { text: "Collecting minimal data required for processing" },
+                { text: "Ensuring data is accurate and up to date" },
+                { text: "Encrypting data and implementing access controls" },
+            ],
+            correct: "Collecting excessive personal data not necessary for the intended purpose"
+        },
+        {
+            question: "23) Under 'Accountability and Responsibility', organizations may need to appoint which role?",
+            options: [
+                { text: "Data Protection Officer (DPO)" },
+                { text: "Chief Financial Officer (CFO)" },
+                { text: "Marketing Manager" },
+                { text: "Designating roles and responsibilities for data protection within the organization" },
+            ],
+            correct: "Data Protection Officer (DPO)"
+        },
+        {
+            question: "24) In data protection policies, 'Training and Awareness' programs are designed for whom?",
+            options: [
+                { text: "All personnel handling personal data" },
+                { text: "Only the executive management" },
+                { text: "Data subjects themselves" },
+                { text: "Third parties processing personal data" },
+            ],
+            correct: "All personnel handling personal data"
+        },
+        {
+            question: "25) Which of the following is a legal obligation when a data breach occurs under PDPL?",
+            options: [
+                { text: "Notify affected individuals and regulatory authorities as required" },
+                { text: "Keep the breach confidential to protect company reputation" },
+                { text: "Delete all records of the breach" },
+                { text: "Procedures for identifying, reporting, and responding to data breaches" },
+            ],
+            correct: "Notify affected individuals and regulatory authorities as required"
+        },
+        {
+            question: "26) The PDPL applies to processing of personal data of which individuals?",
+            options: [
+                { text: "Residents of Saudi Arabia" },
+                { text: "Only citizens of Saudi Arabia" },
+                { text: "Any individual worldwide" },
+                { text: "Employees of the government only" },
+            ],
+            correct: "Residents of Saudi Arabia"
+        },
+        {
+            question: "27) What is the importance of 'Policy Review and Updates' in data protection?",
+            options: [
+                { text: "To ensure policies stay current with legal and regulatory changes" },
+                { text: "To remove outdated security measures" },
+                { text: "To avoid compliance with new laws" },
+                { text: "To limit data collection to what is necessary" },
+            ],
+            correct: "To ensure policies stay current with legal and regulatory changes"
+        },
+        {
+            question: "28) Which of the following is true about 'Data Subject Rights' under PDPL?",
+            options: [
+                { text: "Data subjects can request correction of inaccurate personal data" },
+                { text: "Data subjects have no right to know how their data is used" },
+                { text: "Organizations can deny all requests from data subjects" },
+                { text: "Data subjects must pay a fee to access their rights" },
+            ],
+            correct: "Data subjects can request correction of inaccurate personal data"
+        },
+        {
+            question: "29) 'International Data Transfers' in the context of PDPL require organizations to:",
+            options: [
+                { text: "Ensure adequate data protection during such transfers" },
+                { text: "Ignore data protection during transfers" },
+                { text: "Avoid any contractual agreements with foreign entities" },
+                { text: "Transfer data only to countries without data protection laws" },
+            ],
+            correct: "Ensure adequate data protection during such transfers"
+        },
+        {
+            question: "30) Which statement about 'Third-Party Contracts' is accurate?",
+            options: [
+                { text: "Third parties must comply with data protection standards and outline contractual terms" },
+                { text: "Third parties are exempt from data protection policies" },
+                { text: "Organizations have no responsibility over third-party data processing" },
+                { text: "Third-party contracts are unnecessary under PDPL" },
+            ],
+            correct: "Third parties must comply with data protection standards and outline contractual terms"
+        },
+ ];
+
+        const quizContainer = document.getElementById('quiz');
+        const submitButton = document.getElementById('submit-button');
+
+        const selectSound = document.getElementById('select-sound');
+        const hoverSound = document.getElementById('hover-sound');
+        const submitSound = document.getElementById('submit-sound');
+        const selectSubmitSound = document.getElementById('select-submit-sound');
+
+        const timerElement = document.getElementById('timer');
+        let selectedAnswers = [];
+        let timer = 0;
+        let timerInterval;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizContainer.innerHTML = '';
+            selectedAnswers = new Array(quizData.length).fill(null);
+            quizData.forEach((data, index) => {
+                const questionContainer = document.createElement('div');
+                questionContainer.classList.add('question-container');
+
+                const questionElement = document.createElement('h3');
+                questionElement.innerHTML = `${index + 1}. ${data.question}`;
+                questionContainer.appendChild(questionElement);
+
+                if (data.image) {
+                    const questionImage = document.createElement('img');
+                    questionImage.src = data.image;
+                    questionImage.alt = "Question Image";
+                    questionImage.style.maxWidth = '100%';
+                    questionImage.style.marginBottom = '10px';
+                    questionContainer.appendChild(questionImage);
+                }
+
+                const options = [...data.options];
+                shuffle(options);
+
+                options.forEach(option => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add('option');
+                    optionElement.textContent = option.text;
+
+                    if (option.image) {
+                        const optionImage = document.createElement('img');
+                        optionImage.src = option.image;
+                        optionImage.alt = "Option Image";
+                        optionImage.style.maxWidth = '500px';
+                        optionImage.style.marginLeft = '10px';
+                        optionElement.appendChild(optionImage);
+                    }
+
+                    optionElement.addEventListener('mouseenter', () => {
+                        hoverSound.currentTime = 0;  // Reset the hover audio to the start
+                        hoverSound.play();  // Play the hover sound
+                    });
+
+                    optionElement.addEventListener('click', () => {
+                        selectSound.currentTime = 0;
+                        selectSound.play();
+                        if (selectedAnswers[index] === option.text) {
+                            selectedAnswers[index] = null;
+                            optionElement.classList.remove('selected');
+                        } else {
+                            selectedAnswers[index] = option.text;
+                            Array.from(questionContainer.getElementsByClassName('option')).forEach(opt => opt.classList.remove('selected'));
+                            optionElement.classList.add('selected');
+                        }
+                    });
+                    questionContainer.appendChild(optionElement);
+                });
+
+                quizContainer.appendChild(questionContainer);
+            });
+        }
+
+        function startTimer() {
+            timer = 0;
+            timerElement.textContent = `Time: ${timer}s`;
+            timerInterval = setInterval(() => {
+                timer++;
+                timerElement.textContent = `Time: ${timer}s`;
+            }, 1000);
+        }
+
+        submitButton.addEventListener('click', () => {
+            selectSubmitSound.currentTime = 0;
+            selectSubmitSound.play();
+            if (submitButton.textContent === 'Submit Answers') {
+                submitSound.currentTime = 0;
+                submitSound.play();
+                clearInterval(timerInterval);
+                let score = 0;
+                quizContainer.innerHTML = '';
+                quizData.forEach((data, index) => {
+                    const questionContainer = document.createElement('div');
+                    questionContainer.classList.add('question-container');
+
+                    const questionElement = document.createElement('h3');
+                    questionElement.innerHTML = `${index + 1}. ${data.question}`;
+                    questionContainer.appendChild(questionElement);
+
+                    if (data.image) {
+                        const questionImage = document.createElement('img');
+                        questionImage.src = data.image;
+                        questionImage.alt = "Question Image";
+                        questionImage.style.maxWidth = '100%';
+                        questionImage.style.marginBottom = '10px';
+                        questionContainer.appendChild(questionImage);
+                    }
+
+                    data.options.forEach(option => {
+                        const optionElement = document.createElement('div');
+                        optionElement.classList.add('option');
+                        optionElement.textContent = option.text;
+
+                        if (option.image) {
+                            const optionImage = document.createElement('img');
+                            optionImage.src = option.image;
+                            optionImage.alt = "Option Image";
+                            optionImage.style.maxWidth = '500px';
+                            optionImage.style.marginLeft = '10px';
+                            optionElement.appendChild(optionImage);
+                        }
+
+                        if (option.text === data.correct) {
+                            if (selectedAnswers[index] === option.text) {
+                                score++;
+                                optionElement.classList.add('correct');
+                                const tickIcon = document.createElement('span');
+                                tickIcon.classList.add('icon');
+                                tickIcon.textContent = '✔';
+                                optionElement.appendChild(tickIcon);
+                            } else {
+                                optionElement.classList.add('correct');
+                            }
+                        } else if (selectedAnswers[index] === option.text) {
+                            optionElement.classList.add('wrong');
+                            const crossIcon = document.createElement('span');
+                            crossIcon.classList.add('icon');
+                            crossIcon.textContent = '✖';
+                            optionElement.appendChild(crossIcon);
+                        }
+                        questionContainer.appendChild(optionElement);
+                    });
+
+                    quizContainer.appendChild(questionContainer);
+                });
+
+                timerElement.textContent = `Your score: ${score}/${quizData.length}`;
+                submitButton.textContent = 'Retake';
+            } else if (submitButton.textContent === 'Retake') {
+                loadQuiz();
+                startTimer();
+                submitButton.textContent = 'Submit Answers';
+            }
+        });
+
+        loadQuiz();
+        startTimer();
+    </script>
+</body>
+</html>
