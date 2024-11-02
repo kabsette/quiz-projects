@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Society - 1</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body { 
+            font-family: Montserrat, 
+            sans-serif; 
+            max-width: 600px; 
+            margin: 50px auto; 
+            position: relative; 
+            background-color: #0c0c0c; 
+            color: #f0f0f0; 
+        }
+        .question-container { 
+            margin-bottom: 20px; 
+            box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.5); /* Adjust the shadow values as needed */
+            padding: 2px 8px 4px 8px;
+            background-color: #141414;
+        }
+        .option { cursor: pointer; padding: 8px; border: 1px solid #28282b; margin-bottom: 10px; transition: transform 0.2s ease; background-color: #28282b; color: #f0f0f0; display: flex; align-items: center; justify-content: space-between; }
+        .option img { max-width: 500px; height: auto; margin-left: 10px; flex-shrink: 0; } .option:hover { transform: scale(1.05); background-color: #555; }
+        .option:hover { transform: scale(1.05); background-color: #000000; }
+        .option:active { transform: scale(0.95); }
+        .option.selected { background-color: #7abaff; color: #000; }
+        .correct { background-color: #66bd69; position: relative; color: #000; }
+        .wrong { background-color: #df6158; position: relative; color: #000; }
+        .icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 20px; }
+        #submit-button { position: fixed; bottom: 20px; right: 20px; padding: 15px 30px; z-index: 1000; background-color: #7abaff; border: none; cursor: pointer; transition: transform 0.2s ease; font-size: 24px; }
+        #submit-button:hover { transform: scale(1.05); }
+        #submit-button:active { transform: scale(0.95); }
+        #timer { position: fixed; bottom: 90px; right: 20px; font-size: 24px; background-color: #28282b; color: #f0f0f0; padding: 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Computer Society - 1</h1>
+    <div id="quiz"></div>
+    <div id="timer">Time: 0s</div>
+    <button id="submit-button">Submit Answers</button>
+    <audio id="select-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="select-submit-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="hover-sound" src="data:audio/mpeg;base64,None"></audio>
+    <audio id="submit-sound" src="data:audio/mpeg;base64,None"></audio>
+    <script>
+	const quizData = [
+            {
+            question: "1) The primary focus of Saudi Arabia's Personal Data Protection Law (PDPL) is:",
+            options: [
+                { text: "Protecting individuals' personal data and privacy" },
+                { text: "Allowing unrestricted data sharing" },
+                { text: "Promoting financial transparency" },
+                { text: "Standardizing software development practices" },
+            ],
+            correct: "Protecting individuals' personal data and privacy"
+        },
+        {
+            question: "2) Who is responsible for overseeing the Haseen cybersecurity program?",
+            options: [
+                { text: "National Cybersecurity Authority (NCA)" },
+                { text: "Ministry of Communications" },
+                { text: "Saudi Data and Artificial Intelligence Authority (SDAIA)" },
+                { text: "Digital Government Authority (DGA)" },
+            ],
+            correct: "National Cybersecurity Authority (NCA)"
+        },
+        {
+            question: "3) The Qiyas Indicator primarily measures:",
+            options: [
+                { text: "Digital transformation progress in government" },
+                { text: "Cybersecurity threats" },
+                { text: "Employee retention" },
+                { text: "Data storage capacity" },
+            ],
+            correct: "Digital transformation progress in government"
+        },
+        {
+            question: "4) Which entity is responsible for business continuity assessment through the Sumood Indicator?",
+            options: [
+                { text: "National Risk Council (NRC)" },
+                { text: "National Cybersecurity Authority (NCA)" },
+                { text: "Saudi Data and Artificial Intelligence Authority (SDAIA)" },
+                { text: "Ministry of Commerce" },
+            ],
+            correct: "National Risk Council (NRC)"
+        },
+        {
+            question: "5) 'Data Minimization' in PDPL is the practice of:",
+            options: [
+                { text: "Collecting only necessary personal data" },
+                { text: "Storing as much data as possible" },
+                { text: "Sharing data without restrictions" },
+                { text: "Retaining data indefinitely" },
+            ],
+            correct: "Collecting only necessary personal data"
+        },
+        {
+            question: "6) Which of these principles is part of the ACM/IEEE Code of Ethics?",
+            options: [
+                { text: "Promote the integrity and reputation of the profession" },
+                { text: "Ignore public interest" },
+                { text: "Focus solely on profitability" },
+                { text: "Disregard confidentiality" },
+            ],
+            correct: "Promote the integrity and reputation of the profession"
+        },
+        {
+            question: "7) The right to 'Data Portability' allows individuals to:",
+            options: [
+                { text: "Receive their personal data in a structured format for transfer" },
+                { text: "Access any public data freely" },
+                { text: "Demand permanent data deletion" },
+                { text: "Disable data security measures" },
+            ],
+            correct: "Receive their personal data in a structured format for transfer"
+        },
+        {
+            question: "8) The purpose of the National Data Index (NDI) is to:",
+            options: [
+                { text: "Monitor data management maturity in government entities" },
+                { text: "Track financial compliance in the private sector" },
+                { text: "Measure public satisfaction" },
+                { text: "Assess cybersecurity incidents" },
+            ],
+            correct: "Monitor data management maturity in government entities"
+        },
+        {
+            question: "9) The Haseen program evaluates:",
+            options: [
+                { text: "Cybersecurity readiness and vulnerabilities" },
+                { text: "Data storage capacity" },
+                { text: "Employee productivity" },
+                { text: "Public health metrics" },
+            ],
+            correct: "Cybersecurity readiness and vulnerabilities"
+        },
+        {
+            question: "10) Which of these is a required practice under Saudi's PDPL?",
+            options: [
+                { text: "Obtaining consent before collecting personal data" },
+                { text: "Ignoring user rights" },
+                { text: "Providing unrestricted data access to all employees" },
+                { text: "Retaining all data permanently" },
+            ],
+            correct: "Obtaining consent before collecting personal data"
+        },
+        {
+            question: "11) The principle of 'Accountability' in data protection ensures that:",
+            options: [
+                { text: "Organizations are responsible for their data protection practices" },
+                { text: "Only the government is accountable for data breaches" },
+                { text: "No entity is liable for data misuse" },
+                { text: "Employees have unrestricted access to data" },
+            ],
+            correct: "Organizations are responsible for their data protection practices"
+        },
+        {
+            question: "12) Which organization in Saudi Arabia is focused on digital transformation?",
+            options: [
+                { text: "Digital Government Authority (DGA)" },
+                { text: "National Risk Council (NRC)" },
+                { text: "Ministry of Finance" },
+                { text: "Saudi Red Crescent" },
+            ],
+            correct: "Digital Government Authority (DGA)"
+        },
+        {
+            question: "13) 'Integrity' in data security refers to:",
+            options: [
+                { text: "Ensuring data remains accurate and unchanged" },
+                { text: "Allowing modifications by unauthorized users" },
+                { text: "Providing all data publicly" },
+                { text: "Collecting extensive personal information" },
+            ],
+            correct: "Ensuring data remains accurate and unchanged"
+        },
+        {
+            question: "14) Which of the following is NOT a responsibility of a Data Protection Officer (DPO)?",
+            options: [
+                { text: "Managing marketing campaigns" },
+                { text: "Ensuring data processing compliance" },
+                { text: "Educating staff on data protection" },
+                { text: "Handling data subject requests" },
+            ],
+            correct: "Managing marketing campaigns"
+        },
+        {
+            question: "15) The Sumood Indicator is used to measure:",
+            options: [
+                { text: "Business continuity and risk management readiness" },
+                { text: "Employee productivity" },
+                { text: "Customer satisfaction" },
+                { text: "Cybersecurity incidents" },
+            ],
+            correct: "Business continuity and risk management readiness"
+        },
+        {
+            question: "16) In PDPL, 'Right to Rectification' allows individuals to:",
+            options: [
+                { text: "Request correction of inaccurate data" },
+                { text: "Ignore data processing practices" },
+                { text: "Demand financial compensation" },
+                { text: "Transfer any government data" },
+            ],
+            correct: "Request correction of inaccurate data"
+        },
+        {
+            question: "17) The 'Right to Object' in data protection laws enables individuals to:",
+            options: [
+                { text: "Refuse certain types of data processing" },
+                { text: "Access all personal data of others" },
+                { text: "Disable cybersecurity measures" },
+                { text: "Ignore data privacy policies" },
+            ],
+            correct: "Refuse certain types of data processing"
+        },
+        {
+            question: "18) Which authority manages data compliance in Saudi Arabia?",
+            options: [
+                { text: "Saudi Data and Artificial Intelligence Authority (SDAIA)" },
+                { text: "National Risk Council (NRC)" },
+                { text: "Ministry of Health" },
+                { text: "Public Investment Fund" },
+            ],
+            correct: "Saudi Data and Artificial Intelligence Authority (SDAIA)"
+        },
+        {
+            question: "19) The principle of 'Data Minimization' is intended to:",
+            options: [
+                { text: "Limit data collection to what is necessary for specific purposes" },
+                { text: "Encourage excessive data collection" },
+                { text: "Allow data retention indefinitely" },
+                { text: "Collect all available information" },
+            ],
+            correct: "Limit data collection to what is necessary for specific purposes"
+        },
+        {
+            question: "20) In data security, 'Confidentiality' ensures that:",
+            options: [
+                { text: "Access to personal data is restricted to authorized users" },
+                { text: "All data is shared freely" },
+                { text: "Anyone can access sensitive information" },
+                { text: "Data is visible to the public" },
+            ],
+            correct: "Access to personal data is restricted to authorized users"
+        },
+        {
+            question: "21) Which of these is a right granted under PDPL?",
+            options: [
+                { text: "Right to Data Portability" },
+                { text: "Right to ignore data policies" },
+                { text: "Right to unlimited data collection" },
+                { text: "Right to modify all records" },
+            ],
+            correct: "Right to Data Portability"
+        },
+        {
+            question: "22) The Digital Government Authority (DGA) aims to:",
+            options: [
+                { text: "Promote digital transformation across government entities" },
+                { text: "Manage personal health data" },
+                { text: "Enhance physical security in public spaces" },
+                { text: "Increase sales in the private sector" },
+            ],
+            correct: "Promote digital transformation across government entities"
+        },
+        {
+            question: "23) The Haseen Indicator is primarily associated with:",
+            options: [
+                { text: "Cybersecurity readiness and improvement" },
+                { text: "Data sharing policies" },
+                { text: "Employee attendance" },
+                { text: "Public service satisfaction" },
+            ],
+            correct: "Cybersecurity readiness and improvement"
+        },
+        {
+            question: "24) Which right allows individuals to delete their personal data under PDPL?",
+            options: [
+                { text: "Right to Erasure" },
+                { text: "Right to Access" },
+                { text: "Right to Publicity" },
+                { text: "Right to Retention" },
+            ],
+            correct: "Right to Erasure"
+        },
+        {
+            question: "25) The National Risk Council (NRC) oversees indicators related to:",
+            options: [
+                { text: "Business continuity and risk management" },
+                { text: "Sales and marketing" },
+                { text: "Public health data" },
+                { text: "Employee satisfaction" },
+            ],
+            correct: "Business continuity and risk management"
+        },
+        {
+            question: "26) The principle of 'Data Security' under PDPL requires:",
+            options: [
+                { text: "Protecting data against unauthorized access and breaches" },
+                { text: "Making all data publicly available" },
+                { text: "Sharing data with third parties without consent" },
+                { text: "Ignoring encryption and access controls" },
+            ],
+            correct: "Protecting data against unauthorized access and breaches"
+        },
+        {
+            question: "27) The Qiyas Indicator helps to measure:",
+            options: [
+                { text: "Digital transformation maturity in government" },
+                { text: "Financial transactions in the private sector" },
+                { text: "Employee productivity" },
+                { text: "Personal health records" },
+            ],
+            correct: "Digital transformation maturity in government"
+        },
+        {
+            question: "28) In data protection, 'Accountability' means that:",
+            options: [
+                { text: "Organizations are responsible for compliance with data laws" },
+                { text: "Individuals handle data compliance" },
+                { text: "Employees are not accountable for breaches" },
+                { text: "The public oversees data protection" },
+            ],
+            correct: "Organizations are responsible for compliance with data laws"
+        },
+        {
+            question: "29) The 'Right to Access' allows individuals to:",
+            options: [
+                { text: "View and access their own personal data" },
+                { text: "Access any data in public records" },
+                { text: "Override security protocols" },
+                { text: "Sell personal data freely" },
+            ],
+            correct: "View and access their own personal data"
+        },
+        {
+            question: "30) The Sumood Indicator is primarily used for:",
+            options: [
+                { text: "Assessing business continuity and risk management" },
+                { text: "Tracking employee performance" },
+                { text: "Evaluating public satisfaction" },
+                { text: "Monitoring financial health" },
+            ],
+            correct: "Assessing business continuity and risk management"
+        },
+        {
+            question: "31) Under PDPL, data controllers must:",
+            options: [
+                { text: "Obtain user consent for data processing" },
+                { text: "Share data without restrictions" },
+                { text: "Retain all data indefinitely" },
+                { text: "Ignore data accuracy" },
+            ],
+            correct: "Obtain user consent for data processing"
+        },
+        {
+            question: "32) The National Cybersecurity Authority (NCA) manages which program?",
+            options: [
+                { text: "Haseen for cybersecurity" },
+                { text: "Sumood for business continuity" },
+                { text: "Qiyas for digital transformation" },
+                { text: "NDI for data management" },
+            ],
+            correct: "Haseen for cybersecurity"
+        },
+        {
+            question: "33) According to PDPL, 'Data Retention' means data should be:",
+            options: [
+                { text: "Stored only as long as necessary for its purpose" },
+                { text: "Retained indefinitely" },
+                { text: "Deleted immediately" },
+                { text: "Shared with the public" },
+            ],
+            correct: "Stored only as long as necessary for its purpose"
+        },
+        {
+            question: "34) Which principle ensures that organizations must notify users of data breaches?",
+            options: [
+                { text: "Data Breach Notification" },
+                { text: "Unlimited Data Access" },
+                { text: "Data Minimization" },
+                { text: "Data Hoarding" },
+            ],
+            correct: "Data Breach Notification"
+        },
+        {
+            question: "35) Which authority is responsible for managing the National Data Index (NDI)?",
+            options: [
+                { text: "Saudi Data and Artificial Intelligence Authority (SDAIA)" },
+                { text: "National Cybersecurity Authority (NCA)" },
+                { text: "Digital Government Authority (DGA)" },
+                { text: "Ministry of Health" },
+            ],
+            correct: "Saudi Data and Artificial Intelligence Authority (SDAIA)"
+        },
+        {
+            question: "36) 'Right to Rectification' allows individuals to:",
+            options: [
+                { text: "Correct any inaccurate or incomplete data" },
+                { text: "Share their data publicly" },
+                { text: "Ignore privacy policies" },
+                { text: "Delete others' personal data" },
+            ],
+            correct: "Correct any inaccurate or incomplete data"
+        },
+        {
+            question: "37) The principle of 'Transparency' in data protection requires organizations to:",
+            options: [
+                { text: "Inform individuals about data collection and processing" },
+                { text: "Keep all data practices confidential" },
+                { text: "Allow unrestricted data access" },
+                { text: "Never disclose data usage" },
+            ],
+            correct: "Inform individuals about data collection and processing"
+        },
+        {
+            question: "38) The Digital Government Authority (DGA) promotes which indicator?",
+            options: [
+                { text: "Qiyas Indicator for digital transformation" },
+                { text: "Haseen Indicator for cybersecurity" },
+                { text: "Sumood Indicator for risk management" },
+                { text: "NDI for health data management" },
+            ],
+            correct: "Qiyas Indicator for digital transformation"
+        },
+        {
+            question: "39) According to ethical guidelines, 'Integrity' requires professionals to:",
+            options: [
+                { text: "Act honestly and transparently" },
+                { text: "Prioritize personal gain" },
+                { text: "Ignore ethical practices" },
+                { text: "Disregard confidentiality" },
+            ],
+            correct: "Act honestly and transparently"
+        },
+        {
+            question: "40) 'Data Confidentiality' in PDPL requires that:",
+            options: [
+                { text: "Data access is limited to authorized users" },
+                { text: "Data is freely accessible" },
+                { text: "Personal data is available to all employees" },
+                { text: "Privacy laws are ignored" },
+            ],
+            correct: "Data access is limited to authorized users"
+        },
+        {
+            question: "41) Which entity handles cybersecurity compliance under the Haseen Program?",
+            options: [
+                { text: "National Cybersecurity Authority (NCA)" },
+                { text: "Digital Government Authority (DGA)" },
+                { text: "National Risk Council (NRC)" },
+                { text: "Saudi Red Crescent" },
+            ],
+            correct: "National Cybersecurity Authority (NCA)"
+        },
+        {
+            question: "42) Which organization manages business continuity assessment?",
+            options: [
+                { text: "National Risk Council (NRC)" },
+                { text: "Saudi Data and Artificial Intelligence Authority (SDAIA)" },
+                { text: "Ministry of Health" },
+                { text: "Digital Government Authority (DGA)" },
+            ],
+            correct: "National Risk Council (NRC)"
+        },
+        {
+            question: "43) The 'Right to Erasure' in PDPL provides individuals the right to:",
+            options: [
+                { text: "Request deletion of their personal data" },
+                { text: "Access all personal data of others" },
+                { text: "Sell public data" },
+                { text: "Transfer government records" },
+            ],
+            correct: "Request deletion of their personal data"
+        },
+        {
+            question: "44) 'Data Integrity' requires that data:",
+            options: [
+                { text: "Is accurate and safeguarded against alteration" },
+                { text: "Is freely modifiable" },
+                { text: "Can be changed by anyone" },
+                { text: "Is always publicly accessible" },
+            ],
+            correct: "Is accurate and safeguarded against alteration"
+        },
+        {
+            question: "45) Which right allows individuals to restrict data processing?",
+            options: [
+                { text: "Right to Restrict Processing" },
+                { text: "Right to Public Access" },
+                { text: "Right to Retention" },
+                { text: "Right to Data Transfer" },
+            ],
+            correct: "Right to Restrict Processing"
+        },
+        {
+            question: "46) The Qiyas Indicator assists government entities in:",
+            options: [
+                { text: "Tracking their digital transformation progress" },
+                { text: "Monitoring financial transactions" },
+                { text: "Managing health data" },
+                { text: "Evaluating physical security" },
+            ],
+            correct: "Tracking their digital transformation progress"
+        },
+        {
+            question: "47) Which of these is an ethical responsibility for IT professionals?",
+            options: [
+                { text: "Respecting confidentiality" },
+                { text: "Ignoring client needs" },
+                { text: "Prioritizing financial gain over ethics" },
+                { text: "Avoiding accountability" },
+            ],
+            correct: "Respecting confidentiality"
+        },
+        {
+            question: "48) The 'Right to Data Portability' allows individuals to:",
+            options: [
+                { text: "Transfer their data to other entities" },
+                { text: "Make data public" },
+                { text: "Retain data permanently" },
+                { text: "Delete all company records" },
+            ],
+            correct: "Transfer their data to other entities"
+        },
+        {
+            question: "49) The principle of 'Integrity' in data security ensures:",
+            options: [
+                { text: "Data accuracy and consistency are maintained" },
+                { text: "Data is altered frequently" },
+                { text: "Public access to all data" },
+                { text: "Data is left unmonitored" },
+            ],
+            correct: "Data accuracy and consistency are maintained"
+        },
+        {
+            question: "50) The Digital Government Authority (DGA) is responsible for:",
+            options: [
+                { text: "Advancing digital transformation in government" },
+                { text: "Managing cybersecurity incidents in private firms" },
+                { text: "Improving public health services" },
+                { text: "Monitoring financial markets" },
+            ],
+            correct: "Advancing digital transformation in government"
+        },
+ ];
+
+        const quizContainer = document.getElementById('quiz');
+        const submitButton = document.getElementById('submit-button');
+
+        const selectSound = document.getElementById('select-sound');
+        const hoverSound = document.getElementById('hover-sound');
+        const submitSound = document.getElementById('submit-sound');
+        const selectSubmitSound = document.getElementById('select-submit-sound');
+
+        const timerElement = document.getElementById('timer');
+        let selectedAnswers = [];
+        let timer = 0;
+        let timerInterval;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            quizContainer.innerHTML = '';
+            selectedAnswers = new Array(quizData.length).fill(null);
+            quizData.forEach((data, index) => {
+                const questionContainer = document.createElement('div');
+                questionContainer.classList.add('question-container');
+
+                const questionElement = document.createElement('h3');
+                questionElement.innerHTML = `${index + 1}. ${data.question}`;
+                questionContainer.appendChild(questionElement);
+
+                if (data.image) {
+                    const questionImage = document.createElement('img');
+                    questionImage.src = data.image;
+                    questionImage.alt = "Question Image";
+                    questionImage.style.maxWidth = '100%';
+                    questionImage.style.marginBottom = '10px';
+                    questionContainer.appendChild(questionImage);
+                }
+
+                const options = [...data.options];
+                shuffle(options);
+
+                options.forEach(option => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add('option');
+                    optionElement.textContent = option.text;
+
+                    if (option.image) {
+                        const optionImage = document.createElement('img');
+                        optionImage.src = option.image;
+                        optionImage.alt = "Option Image";
+                        optionImage.style.maxWidth = '500px';
+                        optionImage.style.marginLeft = '10px';
+                        optionElement.appendChild(optionImage);
+                    }
+
+                    optionElement.addEventListener('mouseenter', () => {
+                        hoverSound.currentTime = 0;  // Reset the hover audio to the start
+                        hoverSound.play();  // Play the hover sound
+                    });
+
+                    optionElement.addEventListener('click', () => {
+                        selectSound.currentTime = 0;
+                        selectSound.play();
+                        if (selectedAnswers[index] === option.text) {
+                            selectedAnswers[index] = null;
+                            optionElement.classList.remove('selected');
+                        } else {
+                            selectedAnswers[index] = option.text;
+                            Array.from(questionContainer.getElementsByClassName('option')).forEach(opt => opt.classList.remove('selected'));
+                            optionElement.classList.add('selected');
+                        }
+                    });
+                    questionContainer.appendChild(optionElement);
+                });
+
+                quizContainer.appendChild(questionContainer);
+            });
+        }
+
+        function startTimer() {
+            timer = 0;
+            timerElement.textContent = `Time: ${timer}s`;
+            timerInterval = setInterval(() => {
+                timer++;
+                timerElement.textContent = `Time: ${timer}s`;
+            }, 1000);
+        }
+
+        submitButton.addEventListener('click', () => {
+            selectSubmitSound.currentTime = 0;
+            selectSubmitSound.play();
+            if (submitButton.textContent === 'Submit Answers') {
+                submitSound.currentTime = 0;
+                submitSound.play();
+                clearInterval(timerInterval);
+                let score = 0;
+                quizContainer.innerHTML = '';
+                quizData.forEach((data, index) => {
+                    const questionContainer = document.createElement('div');
+                    questionContainer.classList.add('question-container');
+
+                    const questionElement = document.createElement('h3');
+                    questionElement.innerHTML = `${index + 1}. ${data.question}`;
+                    questionContainer.appendChild(questionElement);
+
+                    if (data.image) {
+                        const questionImage = document.createElement('img');
+                        questionImage.src = data.image;
+                        questionImage.alt = "Question Image";
+                        questionImage.style.maxWidth = '100%';
+                        questionImage.style.marginBottom = '10px';
+                        questionContainer.appendChild(questionImage);
+                    }
+
+                    data.options.forEach(option => {
+                        const optionElement = document.createElement('div');
+                        optionElement.classList.add('option');
+                        optionElement.textContent = option.text;
+
+                        if (option.image) {
+                            const optionImage = document.createElement('img');
+                            optionImage.src = option.image;
+                            optionImage.alt = "Option Image";
+                            optionImage.style.maxWidth = '500px';
+                            optionImage.style.marginLeft = '10px';
+                            optionElement.appendChild(optionImage);
+                        }
+
+                        if (option.text === data.correct) {
+                            if (selectedAnswers[index] === option.text) {
+                                score++;
+                                optionElement.classList.add('correct');
+                                const tickIcon = document.createElement('span');
+                                tickIcon.classList.add('icon');
+                                tickIcon.textContent = '✔';
+                                optionElement.appendChild(tickIcon);
+                            } else {
+                                optionElement.classList.add('correct');
+                            }
+                        } else if (selectedAnswers[index] === option.text) {
+                            optionElement.classList.add('wrong');
+                            const crossIcon = document.createElement('span');
+                            crossIcon.classList.add('icon');
+                            crossIcon.textContent = '✖';
+                            optionElement.appendChild(crossIcon);
+                        }
+                        questionContainer.appendChild(optionElement);
+                    });
+
+                    quizContainer.appendChild(questionContainer);
+                });
+
+                timerElement.textContent = `Your score: ${score}/${quizData.length}`;
+                submitButton.textContent = 'Retake';
+            } else if (submitButton.textContent === 'Retake') {
+                loadQuiz();
+                startTimer();
+                submitButton.textContent = 'Submit Answers';
+            }
+        });
+
+        loadQuiz();
+        startTimer();
+    </script>
+</body>
+</html>
