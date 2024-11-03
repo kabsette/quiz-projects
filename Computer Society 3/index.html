@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Computer Society - 1</title>
+    <title>Computer Society - 3</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
@@ -37,7 +37,7 @@
     </style>
 </head>
 <body>
-    <h1>Computer Society - 1</h1>
+    <h1>Computer Society - 3</h1>
     <div id="quiz"></div>
     <div id="timer">Time: 0s</div>
     <button id="submit-button">Submit Answers</button>
@@ -48,504 +48,504 @@
     <script>
 	const quizData = [
             {
-            question: "1) The primary focus of Saudi Arabia's Personal Data Protection Law (PDPL) is:",
+            question: "1) What is the primary aim of Saudi Arabia's Personal Data Protection Law (PDPL)?",
             options: [
-                { text: "Protecting individuals' personal data and privacy" },
-                { text: "Allowing unrestricted data sharing" },
-                { text: "Promoting financial transparency" },
-                { text: "Standardizing software development practices" },
+                { text: "To regulate financial transactions within Saudi Arabia" },
+                { text: "To protect individuals' personal data rights and privacy" },
+                { text: "To promote international trade agreements" },
+                { text: "To govern only public sector data processing" },
             ],
-            correct: "Protecting individuals' personal data and privacy"
+            correct: "To protect individuals' personal data rights and privacy"
         },
         {
-            question: "2) Who is responsible for overseeing the Haseen cybersecurity program?",
+            question: "2) Which of the following is NOT a common factor in personal data protection policies?",
             options: [
-                { text: "National Cybersecurity Authority (NCA)" },
-                { text: "Ministry of Communications" },
-                { text: "Saudi Data and Artificial Intelligence Authority (SDAIA)" },
-                { text: "Digital Government Authority (DGA)" },
-            ],
-            correct: "National Cybersecurity Authority (NCA)"
-        },
-        {
-            question: "3) The Qiyas Indicator primarily measures:",
-            options: [
-                { text: "Digital transformation progress in government" },
-                { text: "Cybersecurity threats" },
-                { text: "Employee retention" },
-                { text: "Data storage capacity" },
-            ],
-            correct: "Digital transformation progress in government"
-        },
-        {
-            question: "4) Which entity is responsible for business continuity assessment through the Sumood Indicator?",
-            options: [
-                { text: "National Risk Council (NRC)" },
-                { text: "National Cybersecurity Authority (NCA)" },
-                { text: "Saudi Data and Artificial Intelligence Authority (SDAIA)" },
-                { text: "Ministry of Commerce" },
-            ],
-            correct: "National Risk Council (NRC)"
-        },
-        {
-            question: "5) 'Data Minimization' in PDPL is the practice of:",
-            options: [
-                { text: "Collecting only necessary personal data" },
-                { text: "Storing as much data as possible" },
-                { text: "Sharing data without restrictions" },
-                { text: "Retaining data indefinitely" },
-            ],
-            correct: "Collecting only necessary personal data"
-        },
-        {
-            question: "6) Which of these principles is part of the ACM/IEEE Code of Ethics?",
-            options: [
-                { text: "Promote the integrity and reputation of the profession" },
-                { text: "Ignore public interest" },
-                { text: "Focus solely on profitability" },
-                { text: "Disregard confidentiality" },
-            ],
-            correct: "Promote the integrity and reputation of the profession"
-        },
-        {
-            question: "7) The right to 'Data Portability' allows individuals to:",
-            options: [
-                { text: "Receive their personal data in a structured format for transfer" },
-                { text: "Access any public data freely" },
-                { text: "Demand permanent data deletion" },
-                { text: "Disable data security measures" },
-            ],
-            correct: "Receive their personal data in a structured format for transfer"
-        },
-        {
-            question: "8) The purpose of the National Data Index (NDI) is to:",
-            options: [
-                { text: "Monitor data management maturity in government entities" },
-                { text: "Track financial compliance in the private sector" },
-                { text: "Measure public satisfaction" },
-                { text: "Assess cybersecurity incidents" },
-            ],
-            correct: "Monitor data management maturity in government entities"
-        },
-        {
-            question: "9) The Haseen program evaluates:",
-            options: [
-                { text: "Cybersecurity readiness and vulnerabilities" },
-                { text: "Data storage capacity" },
-                { text: "Employee productivity" },
-                { text: "Public health metrics" },
-            ],
-            correct: "Cybersecurity readiness and vulnerabilities"
-        },
-        {
-            question: "10) Which of these is a required practice under Saudi's PDPL?",
-            options: [
-                { text: "Obtaining consent before collecting personal data" },
-                { text: "Ignoring user rights" },
-                { text: "Providing unrestricted data access to all employees" },
-                { text: "Retaining all data permanently" },
-            ],
-            correct: "Obtaining consent before collecting personal data"
-        },
-        {
-            question: "11) The principle of 'Accountability' in data protection ensures that:",
-            options: [
-                { text: "Organizations are responsible for their data protection practices" },
-                { text: "Only the government is accountable for data breaches" },
-                { text: "No entity is liable for data misuse" },
-                { text: "Employees have unrestricted access to data" },
-            ],
-            correct: "Organizations are responsible for their data protection practices"
-        },
-        {
-            question: "12) Which organization in Saudi Arabia is focused on digital transformation?",
-            options: [
-                { text: "Digital Government Authority (DGA)" },
-                { text: "National Risk Council (NRC)" },
-                { text: "Ministry of Finance" },
-                { text: "Saudi Red Crescent" },
-            ],
-            correct: "Digital Government Authority (DGA)"
-        },
-        {
-            question: "13) 'Integrity' in data security refers to:",
-            options: [
-                { text: "Ensuring data remains accurate and unchanged" },
-                { text: "Allowing modifications by unauthorized users" },
-                { text: "Providing all data publicly" },
-                { text: "Collecting extensive personal information" },
-            ],
-            correct: "Ensuring data remains accurate and unchanged"
-        },
-        {
-            question: "14) Which of the following is NOT a responsibility of a Data Protection Officer (DPO)?",
-            options: [
-                { text: "Managing marketing campaigns" },
-                { text: "Ensuring data processing compliance" },
-                { text: "Educating staff on data protection" },
-                { text: "Handling data subject requests" },
-            ],
-            correct: "Managing marketing campaigns"
-        },
-        {
-            question: "15) The Sumood Indicator is used to measure:",
-            options: [
-                { text: "Business continuity and risk management readiness" },
-                { text: "Employee productivity" },
-                { text: "Customer satisfaction" },
-                { text: "Cybersecurity incidents" },
-            ],
-            correct: "Business continuity and risk management readiness"
-        },
-        {
-            question: "16) In PDPL, 'Right to Rectification' allows individuals to:",
-            options: [
-                { text: "Request correction of inaccurate data" },
-                { text: "Ignore data processing practices" },
-                { text: "Demand financial compensation" },
-                { text: "Transfer any government data" },
-            ],
-            correct: "Request correction of inaccurate data"
-        },
-        {
-            question: "17) The 'Right to Object' in data protection laws enables individuals to:",
-            options: [
-                { text: "Refuse certain types of data processing" },
-                { text: "Access all personal data of others" },
-                { text: "Disable cybersecurity measures" },
-                { text: "Ignore data privacy policies" },
-            ],
-            correct: "Refuse certain types of data processing"
-        },
-        {
-            question: "18) Which authority manages data compliance in Saudi Arabia?",
-            options: [
-                { text: "Saudi Data and Artificial Intelligence Authority (SDAIA)" },
-                { text: "National Risk Council (NRC)" },
-                { text: "Ministry of Health" },
-                { text: "Public Investment Fund" },
-            ],
-            correct: "Saudi Data and Artificial Intelligence Authority (SDAIA)"
-        },
-        {
-            question: "19) The principle of 'Data Minimization' is intended to:",
-            options: [
-                { text: "Limit data collection to what is necessary for specific purposes" },
-                { text: "Encourage excessive data collection" },
-                { text: "Allow data retention indefinitely" },
-                { text: "Collect all available information" },
-            ],
-            correct: "Limit data collection to what is necessary for specific purposes"
-        },
-        {
-            question: "20) In data security, 'Confidentiality' ensures that:",
-            options: [
-                { text: "Access to personal data is restricted to authorized users" },
-                { text: "All data is shared freely" },
-                { text: "Anyone can access sensitive information" },
-                { text: "Data is visible to the public" },
-            ],
-            correct: "Access to personal data is restricted to authorized users"
-        },
-        {
-            question: "21) Which of these is a right granted under PDPL?",
-            options: [
-                { text: "Right to Data Portability" },
-                { text: "Right to ignore data policies" },
-                { text: "Right to unlimited data collection" },
-                { text: "Right to modify all records" },
-            ],
-            correct: "Right to Data Portability"
-        },
-        {
-            question: "22) The Digital Government Authority (DGA) aims to:",
-            options: [
-                { text: "Promote digital transformation across government entities" },
-                { text: "Manage personal health data" },
-                { text: "Enhance physical security in public spaces" },
-                { text: "Increase sales in the private sector" },
-            ],
-            correct: "Promote digital transformation across government entities"
-        },
-        {
-            question: "23) The Haseen Indicator is primarily associated with:",
-            options: [
-                { text: "Cybersecurity readiness and improvement" },
-                { text: "Data sharing policies" },
-                { text: "Employee attendance" },
-                { text: "Public service satisfaction" },
-            ],
-            correct: "Cybersecurity readiness and improvement"
-        },
-        {
-            question: "24) Which right allows individuals to delete their personal data under PDPL?",
-            options: [
-                { text: "Right to Erasure" },
-                { text: "Right to Access" },
-                { text: "Right to Publicity" },
-                { text: "Right to Retention" },
-            ],
-            correct: "Right to Erasure"
-        },
-        {
-            question: "25) The National Risk Council (NRC) oversees indicators related to:",
-            options: [
-                { text: "Business continuity and risk management" },
-                { text: "Sales and marketing" },
-                { text: "Public health data" },
-                { text: "Employee satisfaction" },
-            ],
-            correct: "Business continuity and risk management"
-        },
-        {
-            question: "26) The principle of 'Data Security' under PDPL requires:",
-            options: [
-                { text: "Protecting data against unauthorized access and breaches" },
-                { text: "Making all data publicly available" },
-                { text: "Sharing data with third parties without consent" },
-                { text: "Ignoring encryption and access controls" },
-            ],
-            correct: "Protecting data against unauthorized access and breaches"
-        },
-        {
-            question: "27) The Qiyas Indicator helps to measure:",
-            options: [
-                { text: "Digital transformation maturity in government" },
-                { text: "Financial transactions in the private sector" },
-                { text: "Employee productivity" },
-                { text: "Personal health records" },
-            ],
-            correct: "Digital transformation maturity in government"
-        },
-        {
-            question: "28) In data protection, 'Accountability' means that:",
-            options: [
-                { text: "Organizations are responsible for compliance with data laws" },
-                { text: "Individuals handle data compliance" },
-                { text: "Employees are not accountable for breaches" },
-                { text: "The public oversees data protection" },
-            ],
-            correct: "Organizations are responsible for compliance with data laws"
-        },
-        {
-            question: "29) The 'Right to Access' allows individuals to:",
-            options: [
-                { text: "View and access their own personal data" },
-                { text: "Access any data in public records" },
-                { text: "Override security protocols" },
-                { text: "Sell personal data freely" },
-            ],
-            correct: "View and access their own personal data"
-        },
-        {
-            question: "30) The Sumood Indicator is primarily used for:",
-            options: [
-                { text: "Assessing business continuity and risk management" },
-                { text: "Tracking employee performance" },
-                { text: "Evaluating public satisfaction" },
-                { text: "Monitoring financial health" },
-            ],
-            correct: "Assessing business continuity and risk management"
-        },
-        {
-            question: "31) Under PDPL, data controllers must:",
-            options: [
-                { text: "Obtain user consent for data processing" },
-                { text: "Share data without restrictions" },
-                { text: "Retain all data indefinitely" },
-                { text: "Ignore data accuracy" },
-            ],
-            correct: "Obtain user consent for data processing"
-        },
-        {
-            question: "32) The National Cybersecurity Authority (NCA) manages which program?",
-            options: [
-                { text: "Haseen for cybersecurity" },
-                { text: "Sumood for business continuity" },
-                { text: "Qiyas for digital transformation" },
-                { text: "NDI for data management" },
-            ],
-            correct: "Haseen for cybersecurity"
-        },
-        {
-            question: "33) According to PDPL, 'Data Retention' means data should be:",
-            options: [
-                { text: "Stored only as long as necessary for its purpose" },
-                { text: "Retained indefinitely" },
-                { text: "Deleted immediately" },
-                { text: "Shared with the public" },
-            ],
-            correct: "Stored only as long as necessary for its purpose"
-        },
-        {
-            question: "34) Which principle ensures that organizations must notify users of data breaches?",
-            options: [
-                { text: "Data Breach Notification" },
-                { text: "Unlimited Data Access" },
+                { text: "Data Collection and Processing" },
+                { text: "Consent" },
                 { text: "Data Minimization" },
-                { text: "Data Hoarding" },
+                { text: "Encouraging data hoarding" },
             ],
-            correct: "Data Breach Notification"
+            correct: "Encouraging data hoarding"
         },
         {
-            question: "35) Which authority is responsible for managing the National Data Index (NDI)?",
+            question: "3) Under Saudi Arabia's PDPL, personal data processing must be:",
             options: [
-                { text: "Saudi Data and Artificial Intelligence Authority (SDAIA)" },
-                { text: "National Cybersecurity Authority (NCA)" },
-                { text: "Digital Government Authority (DGA)" },
-                { text: "Ministry of Health" },
+                { text: "Secretive and unregulated" },
+                { text: "Fair, lawful, transparent, and secure" },
+                { text: "Only conducted by government agencies" },
+                { text: "Based solely on verbal agreements" },
             ],
-            correct: "Saudi Data and Artificial Intelligence Authority (SDAIA)"
+            correct: "Fair, lawful, transparent, and secure"
         },
         {
-            question: "36) 'Right to Rectification' allows individuals to:",
+            question: "4) Which principle in data protection policies emphasizes that personal data collected should be limited to what is necessary for the intended purpose?",
             options: [
-                { text: "Correct any inaccurate or incomplete data" },
-                { text: "Share their data publicly" },
-                { text: "Ignore privacy policies" },
-                { text: "Delete others' personal data" },
+                { text: "Data Access and Sharing" },
+                { text: "Data Minimization" },
+                { text: "Data Retention" },
+                { text: "Data Breach Notification" },
             ],
-            correct: "Correct any inaccurate or incomplete data"
+            correct: "Data Minimization"
         },
         {
-            question: "37) The principle of 'Transparency' in data protection requires organizations to:",
+            question: "5) In the ACM/IEEE Code of Ethics, which principle states that software engineers shall act consistently with the public interest?",
             options: [
-                { text: "Inform individuals about data collection and processing" },
-                { text: "Keep all data practices confidential" },
-                { text: "Allow unrestricted data access" },
-                { text: "Never disclose data usage" },
+                { text: "Principle 1: Public" },
+                { text: "Principle 4: Judgment" },
+                { text: "Principle 7: Colleagues" },
+                { text: "Principle 8: Self" },
             ],
-            correct: "Inform individuals about data collection and processing"
+            correct: "Principle 1: Public"
         },
         {
-            question: "38) The Digital Government Authority (DGA) promotes which indicator?",
+            question: "6) What is one of the special responsibilities facing computer professionals?",
             options: [
-                { text: "Qiyas Indicator for digital transformation" },
-                { text: "Haseen Indicator for cybersecurity" },
-                { text: "Sumood Indicator for risk management" },
-                { text: "NDI for health data management" },
+                { text: "Avoiding any form of professional competence" },
+                { text: "Maintaining relationships with and responsibilities toward customers, clients, coworkers, employees, and employers" },
+                { text: "Ignoring critical decisions that have significant consequences" },
+                { text: "Disregarding laws and regulations" },
             ],
-            correct: "Qiyas Indicator for digital transformation"
+            correct: "Maintaining relationships with and responsibilities toward customers, clients, coworkers, employees, and employers"
         },
         {
-            question: "39) According to ethical guidelines, 'Integrity' requires professionals to:",
+            question: "7) Which of the following is a key aspect of privacy?",
             options: [
-                { text: "Act honestly and transparently" },
-                { text: "Prioritize personal gain" },
-                { text: "Ignore ethical practices" },
-                { text: "Disregard confidentiality" },
+                { text: "Inability to access personal information" },
+                { text: "Freedom from physical property ownership" },
+                { text: "Control of information about oneself" },
+                { text: "Mandatory sharing of personal data" },
             ],
-            correct: "Act honestly and transparently"
+            correct: "Control of information about oneself"
         },
         {
-            question: "40) 'Data Confidentiality' in PDPL requires that:",
+            question: "8) What does the term 'data mining' refer to?",
             options: [
-                { text: "Data access is limited to authorized users" },
-                { text: "Data is freely accessible" },
-                { text: "Personal data is available to all employees" },
-                { text: "Privacy laws are ignored" },
+                { text: "Encrypting data to prevent access" },
+                { text: "Searching and analyzing masses of data to find patterns and develop new information or knowledge" },
+                { text: "Deleting all personal data from databases" },
+                { text: "Physical mining of data storage devices" },
             ],
-            correct: "Data access is limited to authorized users"
+            correct: "Searching and analyzing masses of data to find patterns and develop new information or knowledge"
         },
         {
-            question: "41) Which entity handles cybersecurity compliance under the Haseen Program?",
+            question: "9) Which of the following is an example of a data privacy regulation?",
             options: [
-                { text: "National Cybersecurity Authority (NCA)" },
+                { text: "Digital Millennium Copyright Act (DMCA)" },
+                { text: "Health and Safety Act" },
+                { text: "General Data Protection Regulation (GDPR)" },
+                { text: "Patent Cooperation Treaty" },
+            ],
+            correct: "General Data Protection Regulation (GDPR)"
+        },
+        {
+            question: "10) Which of the following is NOT an effect of social media on society mentioned in the content?",
+            options: [
+                { text: "Reducing opportunities for creativity and expression" },
+                { text: "Enhancing communication and connectivity" },
+                { text: "Spreading disinformation and fake news" },
+                { text: "Impacting mental health" },
+            ],
+            correct: "Reducing opportunities for creativity and expression"
+        },
+        {
+            question: "11) Which organization is responsible for the 'Haseen' indicator in Saudi Arabia?",
+            options: [
                 { text: "Digital Government Authority (DGA)" },
                 { text: "National Risk Council (NRC)" },
-                { text: "Saudi Red Crescent" },
+                { text: "Saudi Data and Artificial Intelligence Authority (SDAIA)" },
+                { text: "National Cybersecurity Authority (NCA)" },
             ],
             correct: "National Cybersecurity Authority (NCA)"
         },
         {
-            question: "42) Which organization manages business continuity assessment?",
+            question: "12) What does the 'Sumood' indicator measure in Saudi Arabia?",
+            options: [
+                { text: "Cybersecurity commitment" },
+                { text: "Digital transformation readiness" },
+                { text: "Business continuity and risk management readiness levels" },
+                { text: "Data management practices maturity" },
+            ],
+            correct: "Business continuity and risk management readiness levels"
+        },
+        {
+            question: "13) Which of the following is NOT one of the eight principles of the ACM/IEEE Code of Ethics?",
+            options: [
+                { text: "Management" },
+                { text: "Public" },
+                { text: "Client and Employer" },
+                { text: "Profit Maximization" },
+            ],
+            correct: "Profit Maximization"
+        },
+        {
+            question: "14) What is the first step in the process of ethical decision-making according to the CIPS Code of Ethics?",
+            options: [
+                { text: "Reflect on best alternatives" },
+                { text: "Determine action plan" },
+                { text: "Identify the problem and key ethical issues" },
+                { text: "Take action" },
+            ],
+            correct: "Identify the problem and key ethical issues"
+        },
+        {
+            question: "15) What is the main purpose of Digital Rights Management (DRM)?",
+            options: [
+                { text: "To create new digital content formats" },
+                { text: "To encourage free sharing of digital content" },
+                { text: "To delete illegal content from the internet" },
+                { text: "To prevent copying of digital content automatically" },
+            ],
+            correct: "To prevent copying of digital content automatically"
+        },
+        {
+            question: "16) Which act criminalizes circumvention of copyright protections and copying of copyrighted materials?",
+            options: [
+                { text: "Digital Millennium Copyright Act (DMCA)" },
+                { text: "Personal Data Protection Law (PDPL)" },
+                { text: "General Data Protection Regulation (GDPR)" },
+                { text: "Health Insurance Portability and Accountability Act (HIPAA)" },
+            ],
+            correct: "Digital Millennium Copyright Act (DMCA)"
+        },
+        {
+            question: "17) In the context of intellectual property, what is a patent?",
+            options: [
+                { text: "An exclusive right granted for an invention providing a new way of doing something" },
+                { text: "A document that allows free use of any invention" },
+                { text: "A protection only for artistic works" },
+                { text: "A government-issued license to copy software" },
+            ],
+            correct: "An exclusive right granted for an invention providing a new way of doing something"
+        },
+        {
+            question: "18) Which of the following is considered an unethical behavior for computer professionals?",
+            options: [
+                { text: "Keeping promises" },
+                { text: "Being honest" },
+                { text: "Stealing" },
+                { text: "Doing your job well" },
+            ],
+            correct: "Stealing"
+        },
+        {
+            question: "19) Which organization is responsible for the National Data Index (NDI) in Saudi Arabia?",
             options: [
                 { text: "National Risk Council (NRC)" },
-                { text: "Saudi Data and Artificial Intelligence Authority (SDAIA)" },
-                { text: "Ministry of Health" },
+                { text: "National Cybersecurity Authority (NCA)" },
                 { text: "Digital Government Authority (DGA)" },
+                { text: "Saudi Data and Artificial Intelligence Authority (SDAIA)" },
             ],
-            correct: "National Risk Council (NRC)"
+            correct: "Saudi Data and Artificial Intelligence Authority (SDAIA)"
         },
         {
-            question: "43) The 'Right to Erasure' in PDPL provides individuals the right to:",
+            question: "20) Which of the following is a negative effect of social media on society?",
             options: [
-                { text: "Request deletion of their personal data" },
-                { text: "Access all personal data of others" },
-                { text: "Sell public data" },
-                { text: "Transfer government records" },
+                { text: "Empowering activism and awareness" },
+                { text: "Enhancing business and marketing opportunities" },
+                { text: "Facilitating cyberbullying and online harassment" },
+                { text: "Enabling creativity and expression" },
             ],
-            correct: "Request deletion of their personal data"
+            correct: "Facilitating cyberbullying and online harassment"
         },
         {
-            question: "44) 'Data Integrity' requires that data:",
+            question: "21) Which of the following is a professional code for computer ethics?",
             options: [
-                { text: "Is accurate and safeguarded against alteration" },
-                { text: "Is freely modifiable" },
-                { text: "Can be changed by anyone" },
-                { text: "Is always publicly accessible" },
+                { text: "The International Code of Marketing" },
+                { text: "The Geneva Conventions" },
+                { text: "The Software Engineering Code of Ethics and Professional Practice by ACM and IEEE" },
+                { text: "The Universal Declaration of Human Rights" },
             ],
-            correct: "Is accurate and safeguarded against alteration"
+            correct: "The Software Engineering Code of Ethics and Professional Practice by ACM and IEEE"
         },
         {
-            question: "45) Which right allows individuals to restrict data processing?",
+            question: "22) Which of the following is an example of intellectual property?",
             options: [
-                { text: "Right to Restrict Processing" },
-                { text: "Right to Public Access" },
-                { text: "Right to Retention" },
-                { text: "Right to Data Transfer" },
+                { text: "Physical cash" },
+                { text: "An invention or literary work" },
+                { text: "A piece of real estate" },
+                { text: "A manufactured product without any innovation" },
             ],
-            correct: "Right to Restrict Processing"
+            correct: "An invention or literary work"
         },
         {
-            question: "46) The Qiyas Indicator assists government entities in:",
+            question: "23) What is meant by 'invisible information gathering' in privacy terminology?",
             options: [
-                { text: "Tracking their digital transformation progress" },
-                { text: "Monitoring financial transactions" },
-                { text: "Managing health data" },
-                { text: "Evaluating physical security" },
+                { text: "Collecting personal information with the individual's knowledge" },
+                { text: "Collection of personal information about someone without the person's knowledge" },
+                { text: "Sharing information openly on social media" },
+                { text: "Erasing all personal data from a database" },
             ],
-            correct: "Tracking their digital transformation progress"
+            correct: "Collection of personal information about someone without the person's knowledge"
         },
         {
-            question: "47) Which of these is an ethical responsibility for IT professionals?",
+            question: "24) What is one of the key aspects of professional ethics for computer professionals?",
             options: [
-                { text: "Respecting confidentiality" },
-                { text: "Ignoring client needs" },
-                { text: "Prioritizing financial gain over ethics" },
-                { text: "Avoiding accountability" },
+                { text: "Ignoring the impacts of their products on society" },
+                { text: "Following good professional standards and practices" },
+                { text: "Keeping knowledge and technology updates secret" },
+                { text: "Avoiding any interaction with clients" },
             ],
-            correct: "Respecting confidentiality"
+            correct: "Following good professional standards and practices"
         },
         {
-            question: "48) The 'Right to Data Portability' allows individuals to:",
+            question: "25) What is a potential risk associated with location tracking technologies?",
             options: [
-                { text: "Transfer their data to other entities" },
-                { text: "Make data public" },
-                { text: "Retain data permanently" },
-                { text: "Delete all company records" },
+                { text: "Increased privacy and anonymity" },
+                { text: "Vulnerability to surveillance and data misuse" },
+                { text: "Enhanced physical property ownership" },
+                { text: "Elimination of all cybersecurity threats" },
             ],
-            correct: "Transfer their data to other entities"
+            correct: "Vulnerability to surveillance and data misuse"
         },
         {
-            question: "49) The principle of 'Integrity' in data security ensures:",
+            question: "26) Which of the following is NOT a data privacy regulation mentioned in the content?",
             options: [
-                { text: "Data accuracy and consistency are maintained" },
-                { text: "Data is altered frequently" },
-                { text: "Public access to all data" },
-                { text: "Data is left unmonitored" },
+                { text: "General Data Protection Regulation (GDPR)" },
+                { text: "Health Insurance Portability and Accountability Act (HIPAA)" },
+                { text: "California Consumer Privacy Act (CCPA)" },
+                { text: "Digital Millennium Copyright Act (DMCA)" },
             ],
-            correct: "Data accuracy and consistency are maintained"
+            correct: "Digital Millennium Copyright Act (DMCA)"
         },
         {
-            question: "50) The Digital Government Authority (DGA) is responsible for:",
+            question: "27) What is one of the 'Special Aspects of Professional Ethics' for computer professionals?",
             options: [
-                { text: "Advancing digital transformation in government" },
-                { text: "Managing cybersecurity incidents in private firms" },
-                { text: "Improving public health services" },
-                { text: "Monitoring financial markets" },
+                { text: "They should avoid any form of professional competence" },
+                { text: "They must be experts and know customers rely on their knowledge, expertise, and honesty" },
+                { text: "They can ignore the consequences of their work" },
+                { text: "They should always prioritize personal gain over professional standards" },
             ],
-            correct: "Advancing digital transformation in government"
+            correct: "They must be experts and know customers rely on their knowledge, expertise, and honesty"
+        },
+        {
+            question: "28) Which of the following best describes 'Data Breach Notification' in data protection policies?",
+            options: [
+                { text: "Procedures for hiding data breaches from the public" },
+                { text: "Steps for identifying, reporting, and responding to data breaches, including legal obligations for notifying affected individuals or authorities" },
+                { text: "Policies to encourage data hoarding" },
+                { text: "Guidelines for deleting all data after a breach" },
+            ],
+            correct: "Steps for identifying, reporting, and responding to data breaches, including legal obligations for notifying affected individuals or authorities"
+        },
+        {
+            question: "29) In intellectual property, what is the main purpose of trademarks?",
+            options: [
+                { text: "To protect aesthetic appearance" },
+                { text: "To distinguish products and services of one trader from those of another" },
+                { text: "To prevent the copying of software" },
+                { text: "To automatically exist in original literary works" },
+            ],
+            correct: "To distinguish products and services of one trader from those of another"
+        },
+        {
+            question: "30) According to the content, what does 'DRM' stand for?",
+            options: [
+                { text: "Data Retention Mechanism" },
+                { text: "Device Resource Management" },
+                { text: "Data Regulation Mandate" },
+                { text: "Digital Rights Management" },
+            ],
+            correct: "Digital Rights Management"
+        },
+        {
+            question: "31) Which of the following is a component of the 'Sumood' indicator?",
+            options: [
+                { text: "Measures readiness levels in risk management, emergencies, and business continuity" },
+                { text: "Measures the maturity of data management practices" },
+                { text: "Helps government agencies know the level of progress towards digital transformation" },
+                { text: "Evaluates and analyzes people, procedures, and techniques to measure cybersecurity commitment" },
+            ],
+            correct: "Measures readiness levels in risk management, emergencies, and business continuity"
+        },
+        {
+            question: "32) What is one of the risks associated with 'New Technology' and 'New Risks' in privacy?",
+            options: [
+                { text: "Decrease in government and private databases" },
+                { text: "Sophisticated tools for surveillance and data analysis increase" },
+                { text: "Complete protection of data against breaches" },
+                { text: "Elimination of biometric technologies" },
+            ],
+            correct: "Sophisticated tools for surveillance and data analysis increase"
+        },
+        {
+            question: "33) What does the term 'computer matching' refer to in privacy terminology?",
+            options: [
+                { text: "Searching and analyzing data to find patterns" },
+                { text: "Combining and comparing information from different databases" },
+                { text: "Collecting personal information without knowledge" },
+                { text: "Encrypting data to prevent unauthorized access" },
+            ],
+            correct: "Combining and comparing information from different databases"
+        },
+        {
+            question: "34) Which of the following is a positive effect of social media on society?",
+            options: [
+                { text: "Enabling disinformation and fake news" },
+                { text: "Enhancing communication and connectivity" },
+                { text: "Increasing mental health issues" },
+                { text: "Encouraging cyberbullying" },
+            ],
+            correct: "Enhancing communication and connectivity"
+        },
+        {
+            question: "35) What is the main content of the 'CIPS Code of Ethics and Professional Conduct'?",
+            options: [
+                { text: "It provides a rigid set of rules for computer professionals" },
+                { text: "It focuses on maximizing profit for companies" },
+                { text: "It is a guide on how to exploit personal data" },
+                { text: "It helps members provide high levels of service and respect for colleagues, professionals, employers/clients, and public" },
+            ],
+            correct: "It helps members provide high levels of service and respect for colleagues, professionals, employers/clients, and public"
+        },
+        {
+            question: "36) Which of the following is a component of 'Data Subject Rights' in data protection policies?",
+            options: [
+                { text: "Denying individuals access to their data" },
+                { text: "Informing individuals about their rights to access, rectify, erase, and restrict processing of their data" },
+                { text: "Sharing personal data without consent" },
+                { text: "Keeping data retention periods secret" },
+            ],
+            correct: "Informing individuals about their rights to access, rectify, erase, and restrict processing of their data"
+        },
+        {
+            question: "37) In the context of the ACM/IEEE Code of Ethics, what does Principle 4: Judgment entail?",
+            options: [
+                { text: "Software engineers should prioritize profit over ethics" },
+                { text: "Software engineers must share all confidential client data" },
+                { text: "Software engineers shall maintain integrity and independence in their professional judgment" },
+                { text: "Software engineers should delegate all decisions to management" },
+            ],
+            correct: "Software engineers shall maintain integrity and independence in their professional judgment"
+        },
+        {
+            question: "38) What is one of the main purposes of the Personal Data Protection Law (PDPL) in Saudi Arabia?",
+            options: [
+                { text: "To ensure that all entities process personal data per the principles set out in PDPL" },
+                { text: "To allow unrestricted sharing of personal data" },
+                { text: "To eliminate data security measures" },
+                { text: "To prevent individuals from accessing their personal data" },
+            ],
+            correct: "To ensure that all entities process personal data per the principles set out in PDPL"
+        },
+        {
+            question: "39) Which of the following is an example of an intellectual property protection for software?",
+            options: [
+                { text: "Physical property rights" },
+                { text: "Real estate law" },
+                { text: "Copyright protection" },
+                { text: "Maritime law" },
+            ],
+            correct: "Copyright protection"
+        },
+        {
+            question: "40) According to the content, which of the following is a common privacy threat in today's digital world?",
+            options: [
+                { text: "Data breaches" },
+                { text: "Enhanced data security" },
+                { text: "Reduced surveillance" },
+                { text: "Decreased identity theft" },
+            ],
+            correct: "Data breaches"
+        },
+        {
+            question: "41) Which of the following best describes 'data minimization' in data protection policies?",
+            options: [
+                { text: "Collecting as much personal data as possible" },
+                { text: "Limiting personal data collected to what is necessary for the intended purpose" },
+                { text: "Sharing all collected data with third parties" },
+                { text: "Retaining personal data indefinitely" },
+            ],
+            correct: "Limiting personal data collected to what is necessary for the intended purpose"
+        },
+        {
+            question: "42) What is one of the suggested behaviors for 'Doing the Right Thing' ethically?",
+            options: [
+                { text: "Being dishonest" },
+                { text: "Stealing" },
+                { text: "Keeping promises" },
+                { text: "Doing a poor job intentionally" },
+            ],
+            correct: "Keeping promises"
+        },
+        {
+            question: "43) What is the 'Haseen' program's primary focus in Saudi Arabia?",
+            options: [
+                { text: "Assessing data management practices" },
+                { text: "Helping government agencies know the level of progress towards digital transformation" },
+                { text: "Evaluating and analyzing people, procedures, and techniques to measure cybersecurity commitment" },
+                { text: "Measuring readiness levels in business continuity" },
+            ],
+            correct: "Evaluating and analyzing people, procedures, and techniques to measure cybersecurity commitment"
+        },
+        {
+            question: "44) Which of the following is NOT an expected ethical behavior from computer professionals?",
+            options: [
+                { text: "Stealing" },
+                { text: "Being honest" },
+                { text: "Keeping promises" },
+                { text: "Doing your job well" },
+            ],
+            correct: "Stealing"
+        },
+        {
+            question: "45) Which of the following describes 'data retention' in data protection policies?",
+            options: [
+                { text: "Guidelines on how long personal data is retained and the criteria for determining retention periods" },
+                { text: "Instructions to delete data immediately after collection" },
+                { text: "Policies to retain all data indefinitely" },
+                { text: "Ignoring data retention regulations" },
+            ],
+            correct: "Guidelines on how long personal data is retained and the criteria for determining retention periods"
+        },
+        {
+            question: "46) In the context of intellectual property, which of the following is protected under copyright?",
+            options: [
+                { text: "Inventions" },
+                { text: "Literary and artistic works" },
+                { text: "Trade secrets" },
+                { text: "Physical property" },
+            ],
+            correct: "Literary and artistic works"
+        },
+        {
+            question: "47) Which act is known for criminalizing circumvention of copyright protections?",
+            options: [
+                { text: "Personal Data Protection Law (PDPL)" },
+                { text: "General Data Protection Regulation (GDPR)" },
+                { text: "Digital Millennium Copyright Act (DMCA)" },
+                { text: "Health Insurance Portability and Accountability Act (HIPAA)" },
+            ],
+            correct: "Digital Millennium Copyright Act (DMCA)"
+        },
+        {
+            question: "48) What is one of the key data privacy regulations in Saudi Arabia?",
+            options: [
+                { text: "Health Insurance Portability and Accountability Act (HIPAA)" },
+                { text: "Personal Data Protection Law (PDPL)" },
+                { text: "General Data Protection Regulation (GDPR)" },
+                { text: "California Consumer Privacy Act (CCPA)" },
+            ],
+            correct: "Personal Data Protection Law (PDPL)"
+        },
+        {
+            question: "49) According to the content, which of the following is a negative impact of social media on society?",
+            options: [
+                { text: "Facilitating addiction and time-wasting" },
+                { text: "Enhancing educational opportunities" },
+                { text: "Enabling global communication" },
+                { text: "Promoting business growth" },
+            ],
+            correct: "Facilitating addiction and time-wasting"
+        },
+        {
+            question: "50) What is the primary concern addressed in the 'Privacy in the Digital Transformation Era' section?",
+            options: [
+                { text: "The importance of physical property rights" },
+                { text: "The right to keep personal information and activities free from surveillance or interference" },
+                { text: "The elimination of data protection laws" },
+                { text: "The promotion of sharing all personal data" },
+            ],
+            correct: "The right to keep personal information and activities free from surveillance or interference"
         },
  ];
 
